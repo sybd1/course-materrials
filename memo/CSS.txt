@@ -1,0 +1,35 @@
+CSS
+
+블록레벌, 인라인레벨 잘 구분하기
+
+font-family
+line-heigh
+text-align
+width
+height
+border: dashed 대쉬드점선
+box-sizing: border-box
+border-radius
+max-width
+
+flexbox로 배치하기
+display: flex 한 방향, 한 줄 가로로 요소를 배치
+justify-content 요소를 주축 방향으로 정렬하는 태그
+align-items 요소를 교차축으로 정렬
+flex-wrap 박스내 공간이 부족하면 다음 줄로 내려가게 함
+
+Grid로 배치
+display: grid 그리드 설정
+grid-template-columns 공간 비율로 나누기
+gap 나눈 거리 길이 조절
+grid-column 원하는 비율만큼 그리드 크기 조절
+
+Position으로 배치
+position: relative
+position: absolute
+
+margin > border > padding > content
+요소의 간격에 따라 여백을 줄지, 간격을 좁힐지 결정
+a hred "#" #은 통상적으로 임시 링크를 뜻한다.
+
+
