@@ -12,73 +12,39 @@
 // 콜백은 regularPrice, discountPrice처럼 함수 자체를 전달합니다.
 
 
+// 답지
 const book = {
     title: '자바스크립트 입문',
     price: 15000
 };
 
-function calculateTotal(book, quantity) {
-    return book.price * quantity;
+function calculatrTotal(book, quantity) {
+        return book.price * quantity;   // 객체 book에서 필요한 프로퍼티 price를 마침표 표기법으로 불러왔다.
 }
-const result = calculateTotal(book, 2);
-console.log(result);
+
+const total = calculatrTotal(book, 2);
+console.log(total);
 
 book.price = 18000;
-console.log(calculateTotal(book, 2));
-console.log(calculateTotal(book, 0));
+console.log(calculatrTotal(book, 2));
+console.log(calculatrTotal(book, 0));
 
-// const regularPrice = function(total) {
-//     return(total);
-// };
+const regularPrice = function(total) {
+    return total;
+}
 
+const discountPrice = function(total) {
+    if(total < 3000) {
+        return 0;
+    }
+    return total - 3000;
+}
 
+function checkout(book, quantity, pricePolicy) {
+    const total = calculatrTotal(book, quantity);
+    return pricePolicy(total);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // 답지
-// const book = {
-//     title: '자바스크립트 입문',
-//     price: 15000
-// };
-
-// function calculatrTotal(book, quantity) {
-//         return book.price * quantity;   // 객체 book에서 필요한 프로퍼티 price를 마침표 표기법으로 불러왔다.
-// }
-
-// const total = calculatrTotal(book, 2);
-// console.log(total);
-
-// book.price = 18000;
-// console.log(calculatrTotal(book, 2));
-// console.log(calculatrTotal(book, 0));
-
-// const regularPrice = function(total) {
-//     return total;
-// }
-
-// const discountPrice = function(total) {
-//     if(total < 3000) {
-//         return 0;
-//     }
-//     return total - 3000;
-// }
-
-// function checkout(book, quantity, pricePolicy) {
-//     const total = calculatrTotal(book, quantity);
-//     return pricePolicy(total);
-// }
-
-// console.log(checkout(book, 2, regularPrice));
-// console.log(checkout(book, 2, discountPrice));
-// console.log(checkout(book, 0, discountPrice));
+console.log(checkout(book, 2, regularPrice));
+console.log(checkout(book, 2, discountPrice));
+console.log(checkout(book, 0, discountPrice));
