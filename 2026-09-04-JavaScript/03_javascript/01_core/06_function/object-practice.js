@@ -1,0 +1,84 @@
+// title: '자바스크립트 입문', price: 15000을 가진 book 객체를 만듭니다.
+// calculateTotal(book, quantity) 함수를 선언합니다.
+// 함수에서 book의 가격과 수량을 곱해 반환합니다. 함수 안에서는 출력하지 않습니다.
+// 두 권의 총액을 변수에 저장하고 출력합니다.
+// book의 가격을 18000으로 변경하고 두 권의 총액을 다시 호출해 출력합니다.
+// 수량 0도 호출해 확인합니다.
+// const regularPrice = function(total) { ... }; 형태의 함수 표현식으로 총액을 그대로 반환하는 함수를 만듭니다.
+// 같은 방식으로 총액에서 3000원을 빼서 반환하는 discountPrice를 만듭니다. 총액이 3000원 미만이면 조기 반환(Early Return)으로 0을 반환합니다.
+// checkout(book, quantity, pricePolicy)를 선언합니다. 내부에서 calculateTotal로 총액을 구하고, 
+// pricePolicy 콜백(regularPrice 또는 discountPrice)에 총액을 전달한 결과를 반환합니다.
+// 가격이 18000원인 현재 book으로 두 권의 일반 결제와 할인 결제를 호출해 결과를 바깥에서 출력합니다. 수량 0의 할인 결제도 확인합니다. 
+// 콜백은 regularPrice, discountPrice처럼 함수 자체를 전달합니다.
+
+
+const book = {
+    title: '자바스크립트 입문',
+    price: 15000
+};
+
+function calculateTotal(book, quantity) {
+    return book.price * quantity;
+}
+const result = calculateTotal(book, 2);
+console.log(result);
+
+book.price = 18000;
+console.log(calculateTotal(book, 2));
+console.log(calculateTotal(book, 0));
+
+// const regularPrice = function(total) {
+//     return(total);
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // 답지
+// const book = {
+//     title: '자바스크립트 입문',
+//     price: 15000
+// };
+
+// function calculatrTotal(book, quantity) {
+//         return book.price * quantity;   // 객체 book에서 필요한 프로퍼티 price를 마침표 표기법으로 불러왔다.
+// }
+
+// const total = calculatrTotal(book, 2);
+// console.log(total);
+
+// book.price = 18000;
+// console.log(calculatrTotal(book, 2));
+// console.log(calculatrTotal(book, 0));
+
+// const regularPrice = function(total) {
+//     return total;
+// }
+
+// const discountPrice = function(total) {
+//     if(total < 3000) {
+//         return 0;
+//     }
+//     return total - 3000;
+// }
+
+// function checkout(book, quantity, pricePolicy) {
+//     const total = calculatrTotal(book, quantity);
+//     return pricePolicy(total);
+// }
+
+// console.log(checkout(book, 2, regularPrice));
+// console.log(checkout(book, 2, discountPrice));
+// console.log(checkout(book, 0, discountPrice));

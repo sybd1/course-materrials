@@ -1,0 +1,6 @@
+Function : 특정 동작을 이름 붙여 재사용할 수 있게 만든 코드 묶음이다.
+
+객체 (object)
+함수 (function)
+조기 반환 (early return)
+콜백 (callback)
