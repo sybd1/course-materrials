@@ -1,9 +1,9 @@
-'use strict'    // 엄격 모드
+// 엄격 모드
 
 function Student(name, age) {
     console.log(`this가 있는가:`, this !== undefined);  // true
     console.log(`name이 있는가:`, 'name' in this);      // false
-    this.name = name;   // 이곳에서 this라는 객체에 name,age라는 프로퍼티를 만들어줌
+    this.name = name;   // 이곳에서 this라는 객체에 name.age라는 프로퍼티를 만들어줌
     this.age = age;
     this.getInfo = function () {
         return `${this.name}는 ${this.age}세 입니다.`
