@@ -11,7 +11,7 @@ console.log(count);     // 4
 
 // pop: 배열 끝의 요소를 제거하고, 제거한 요소를 반환하는 메서드.
 const removed = food.pop();
-console.log(removed);
+console.log(removed);   // 탕수육
 
 // unshift: 배열의 맨 앞에 요소 추가, 변경 후 길이 반환하는 메서드.
 food.unshift('유산슬');
@@ -19,12 +19,12 @@ console.log(food);      // ['유산슬', '짜장면', '짬뽕', '볶음밥']
 
 // shift(): 배열의 맨 앞 요소 제거, 제거한 요소 반환
 food.shift();
-console.log(food);      // ['짬뽕', '볶음밥', '탕수육']
+console.log(food);      // [ '짜장면', '짬뽕', '볶음밥' ]
 
 const foodList = ['물회', '삼계탕', '냉면', '수박', '물회'];
 
 // indexOF('값'): 값이 처음으로 나오는 인덱스 반환
-console.log(foodList.indexOf('물회'));  // 0
+console.log(foodList.indexOf('수박'));  // 3
 console.log(foodList.indexOf('야호'));  // 없으면 -1 반환
 
 // includes('값'): 값이 있으면 true, 없으면 false

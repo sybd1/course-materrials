@@ -2,7 +2,7 @@
  * 문자열은 변경할 수 없는 값이므로 메서드를 실행해도 원본은 바뀌지 않고 새로운 값을 반환한다.
 */
 
-// 1. trim - 문자열 앞뒤 공백 제거
+// 1. trim() - 문자열 앞뒤 공백 제거
 const rawKeyword = '            JavaScript                   ';
 console.log(rawKeyword);
 const trimmedKeyword = rawKeyword.trim();
@@ -35,7 +35,7 @@ console.log(dotIndex);  // 10
 const extention = fileName.slice(dotIndex);
 console.log(extention); // .jpg
 
-// 7. spilt : 문자열을 배열로 나누기
+// // 7. spilt : 문자열을 배열로 나누기
 // const tags = '#자바스크립트#개발자#프론트엔드';
 // const tagParts = tags.split('#');
 // console.log(tagParts);  // [ '', '자바스크립트', '개발자', '프론트엔드' ]
@@ -45,8 +45,8 @@ console.log(extention); // .jpg
 // console.log(tagList);   // [ '자바스크립트', '개발자', '프론트엔드' ]
 
 // 메서드 체이닝 방식
-const tagList = tags
-.spilt('#')
-.filter(tag => tag !== '');
+// const tagList = tags
+// .spilt('#')
+// .filter(tag => tag !== '');
 
 
