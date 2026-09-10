@@ -1,4 +1,5 @@
 // prototype 상속 : 다른 객체의 프로퍼티 가지고 올 수 있다.
+
 const user = {
     id: 'user',
     activate: true,
