@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM 요소 선택</title>
+    <style>
+        .fruit { color: blue; }
+        .red { color: red; }
+        .box { border: 1px solid #ccc; margin: 10px; padding: 10px; }
+    </style>
+</head>
+<body>
+<h1>DOM 요소 선택: 선택자에 맞는 메서드 사용하기</h1>
+
+<hr>
+
+<h3>1. CSS 선택자를 사용하는 `querySelector`와 `querySelectorAll`</h3>
+<pre>
+    CSS 선택자를 그대로 사용하여 다양한 조건으로 요소를 찾을 수 있습니다.
+    하나를 찾을 때와 조건에 맞는 모든 요소를 찾을 때 반환값이 다릅니다.
+    </pre>
+
+<ul>
+    <li id="apple" class="fruit red">사과</li>
+    <li class="fruit">바나나</li>
+    <li>딸기</li>
+</ul>
+
+<script>
+    // 노드를 찾아오는 방법 공부
+    // querySelector() : CSS 선택자에 맞는 '첫 번째 요소를 하나' 가져온다
+    const $apple = document.querySelector('#apple');
+    console.log($apple);
+    $apple.style.fontWeight = 'bold';
+
+    const $fristFruit = document.querySelector('.fruit');
+    console.log($fristFruit);
+
+    // querySelectorAll(): CSS 선택자에 맞는 '모든 요소'를 NodeList로 찾아온다.
+    const $fruits = document.querySelectorAll('.fruit');
+    console.log($fruits);
+
+    $fruits.forEach(item => {
+        item.style.border = '1px solid blue';
+    })
+</script>
+
+<hr>
+
+<h3>2. `getElementsByClassName`과 살아 있는 목록</h3>
+<pre>
+    `getElementById`와 `getElementsByClassName`도 현재 사용할 수 있는 DOM 메서드입니다.
+    `getElementById`는 요소 하나를 반환하고, `getElementsByClassName`은
+    문서의 변경을 실시간으로 반영하는 `HTMLCollection`을 반환합니다.
+    </pre>
+
+<div class="box">
+    <p class="text">첫 번째 문단</p>
+    <p class="text">두 번째 문단</p>
+    <p class="text">세 번째 문단</p>
+</div>
+
+<script>
+    const $box = document.querySelector('.box');
+
+    const $texts = $box.getElementsByClassName('text');
+    console.log($texts);
+
+    console.log($texts.length);
+    
+
+    // 순회하며 클래스 제거 시도
+    for (let i = 0; i < $texts.length; i++) {
+        console.log(`${i}번쨰 반복 시작: 현재 length, ${$texts.length}`);
+        $texts[i].classList.remove('text');
+    }
+</script>
+
+<hr>
+
+<h3>3. 순회 도중 바뀌지 않는 목록이 필요할 때 배열로 변환하기</h3>
+<pre>
+    `querySelectorAll`은 이런 문제가 없는 '고정된' `NodeList`를 반환하기 때문에 훨씬 안전합니다.
+    `getElementsBy...`로 얻은 살아 있는 목록을 변경하면서 순회해야 한다면,
+    현재 요소들을 먼저 배열로 변환하여 고정된 목록으로 사용할 수 있습니다.
+    </pre>
+
+<div class="box">
+    <p class="text2">첫 번째 문단</p>
+    <p class="text2">두 번째 문단</p>
+    <p class="text2">세 번째 문단</p>
+</div>
+
+<script>
+    const $texts2 = document.getElementsByClassName('text2');
+
+    // 스프레드 문법(...)을 사용하여 일반 배열로 변환
+    const textArray = [...$texts2];
+    console.log(textArray);
+
+    textArray.forEach(item => {
+        item.classList.remove('text2');
+    });
+
+    console.log($texts2.length);    // 0, 실시간으로 비어있음
+    console.log(textArray.length);  // 3
+</script>
+</body>
+</html>
+

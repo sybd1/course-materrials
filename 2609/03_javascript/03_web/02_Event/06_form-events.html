@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>폼 이벤트 다루기</title>
+    <style>
+        form { border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], textarea { width: 300px; padding: 5px; }
+        .focused { outline: 2px solid gold; }
+        .error { color: red; font-size: 12px; }
+    </style>
+</head>
+<body>
+<h1>폼(Form) 이벤트 다루기</h1>
+<pre>
+    사용자가 입력한 데이터를 받고, 검증하고, 서버에 제출하는 웹의 핵심 기능입니다.
+    </pre>
+
+    <!-- 성공하면 action에 있는 url로 데이터 전송된다. 수업 중 실제 이동을 막고 싶다면 submit 성공 시에도 preventDefault를 호출하면 된다. -->
+<form name="joinForm" action="https://example.com/join" method="GET">
+    <div class="form-group">
+        <label for="username">이름</label>
+        <input type="text" name="username" id="username" value="홍길동">
+    </div>
+
+    <div class="form-group">
+        <label>관심사 (2개 이상 선택)</label><br>
+        <input type="checkbox" name="hobby" value="exercise"> 운동
+        <input type="checkbox" name="hobby" value="music"> 음악
+        <input type="checkbox" name="hobby" value="movie"> 영화
+    </div>
+
+    <div class="form-group">
+        <label for="introduce">자기소개 (<span id="char-counter">0</span>/100자)</label>
+        <textarea name="introduce" id="introduce" rows="4" maxlength="100"></textarea>
+    </div>
+
+    <button type="submit">회원가입</button>
+    <p class="error"></p>
+</form>
+
+<script>
+
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>data- 어트리뷰트 실무 예제</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        .product-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        .product-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .info-panel {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+        }
+        .info-panel span {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<h1>미니 쇼핑몰 상품 목록</h1>
+<p>아래 상품 카드를 클릭해 보세요!</p>
+
+<!--
+  [HTML]
+  각 상품(li)마다 눈에 보이지 않는 상품 ID와 가격 정보를
+  'data-product-id'와 'data-price' 어트리뷰트에 숨겨두었습니다.
+-->
+<ul class="product-list">
+    <li class="product-item" data-product-id="p-001" data-price="15000">
+        <h3>상품 A</h3>
+        <p>15,000원</p>
+    </li>
+    <li class="product-item" data-product-id="p-002" data-price="22000">
+        <h3>상품 B</h3>
+        <p>22,000원</p>
+    </li>
+    <li class="product-item" data-product-id="p-003" data-price="8500">
+        <h3>상품 C</h3>
+        <p>8,500원</p>
+    </li>
+</ul>
+
+<div class="info-panel">
+    선택된 상품 정보가 여기에 표시됩니다.
+</div>
+
+<script>
+
+</script>
+</body>
+</html>
+

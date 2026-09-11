@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 조작하기</title>
+    <style>
+        /* 미리 '직업 유니폼'들을 디자인해 둡니다. */
+        .box {
+            width : 150px;
+            height : 150px;
+            border : 2px solid black;
+            transition: all 0.3s;
+        }
+
+        .circle { border-radius: 50%; }
+        .red-bg { background-color: crimson; }
+        .big-text { font-size: 24px; color: white; }
+
+    </style>
+</head>
+<body>
+<h1>CSS 조작: 인라인 스타일 vs 클래스 제어</h1>
+
+<hr>
+
+<h3>1. 임시 명찰 붙이기 (인라인 스타일: element.style)</h3>
+<pre>
+    `element.style` 프로퍼티를 사용하면, 해당 요소에 '인라인 스타일'을 직접 추가하거나 변경할 수 있습니다.
+    간단한 동적 효과를 줄 때 유용하지만, 스타일 관리가 복잡해진다는 단점이 있습니다.
+    </pre>
+
+<div id="box1">첫 번째 박스</div>
+
+<script>
+
+</script>
+
+<hr>
+
+<h3>2. '직업' 부여하기 (클래스 제어: element.classList)</h3>
+<pre>
+    여러 스타일을 상태별로 적용할 때는 CSS에 클래스를 정의하고,
+    자바스크립트에서 `element.classList`로 클래스를 추가·제거하는 방식을 사용할 수 있습니다.
+    </pre>
+
+<div id="box2" class="box">두 번째 박스</div>
+<button id="changeBtn">모양 바꾸기</button>
+<button id="toggleBtn">배경색 토글</button>
+
+<script>
+
+</script>
+</body>
+</html>
+

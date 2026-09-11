@@ -16,6 +16,7 @@ function Student(name, age) {
 const student1 = new Student('판다', 8);
 const student2 = new Student('다람쥐', 4);
 
+// 객체들이 공유할 프로퍼티 메서드 저장
 Student.prototype.activate = true;  //const Student.prototype = { activate: true};
 Student.prototype.getInfo = function() {
     return `${this.name}는 ${this.age}세 입니다.`;  // 호출한 주체가 this가 된다

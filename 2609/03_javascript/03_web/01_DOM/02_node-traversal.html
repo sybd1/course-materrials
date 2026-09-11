@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>node-traversal</title>
+</head>
+<body>
+    <h1>'HTML 가계도' 탐색하기</h1>
+    <pre>
+        우리는 querySelector로 특정 요소를 찾은 뒤, 그 요소를 기준으로
+        가족(부모, 자식, 형제) 요소를 찾아 나갈 수 있습니다.
+
+        이때, 눈에 보이지 않는 '공백'이나 '줄바꿈' (텍스트 노드) 때문에 겪는 혼란을 피하기 위해
+        요소만 필요한 경우에는 이름에 `Element`가 들어간 탐색 프로퍼티를 사용합니다.
+        </pre>
+
+    <ul id="family">
+        <!-- 이 주석과 줄바꿈도 노드입니다! -->
+        <li id="me">나 (기준)</li>
+        <li>나의 첫째 형제</li>
+        <li>나의 둘째 형제</li>
+    </ul>
+
+    <script>
+
+</script>
+</body>
+</html>
+

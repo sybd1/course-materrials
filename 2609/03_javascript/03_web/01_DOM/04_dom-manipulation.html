@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM 조작과 추가</title>
+</head>
+<body>
+<h1>DOM 요소 조작 및 추가하기 (레고 집 리모델링)</h1>
+
+<hr>
+
+<h3>시나리오 1: 내부 전체를 갈아엎기 (innerHTML)</h3>
+<pre>
+    `innerHTML`에 값을 할당하면 요소 내부를 파싱한 HTML 문자열의 결과로 교체합니다.
+    </pre>
+
+<div id="area1">
+    <p>기존에 있던 내용입니다.</p>
+</div>
+
+<script>
+
+</script>
+
+<hr>
+
+<h3>시나리오 2: 특정 위치에 살짝 끼워 넣기 (insertAdjacentHTML)</h3>
+<pre>
+    `insertAdjacentHTML`은 기존 내용은 그대로 유지하면서,
+    원하는 위치 4곳 중 하나를 지정해 HTML 문자열을 파싱한 노드를 삽입하는 방법입니다.
+    </pre>
+<!-- beforebegin -->
+<div id="area2" style="border: 2px solid blue; padding: 10px;">
+    <!-- afterbegin -->
+    <p>기존 컨텐츠 </p>
+    <!-- beforeend -->
+</div>
+<!-- afterend -->
+
+<script>
+
+</script>
+
+<hr>
+
+<h3>시나리오 3: 정밀하게 요소 만들고 조립하기 (createElement / appendChild)</h3>
+<pre>
+    HTML 문자열을 파싱하지 않고 요소를 직접 만드는 방법입니다. 자바스크립트로 요소(레고 블록)를 만들고,
+    만들어진 요소를 원하는 위치에 '조립(append)'하는 방식입니다.
+    </pre>
+
+<ul id="drink-list">
+    <li>커피</li>
+</ul>
+
+<script>
+
+</script>
+
+<hr>
+
+<h3>기타 정밀 조작: 삽입, 이동, 교체, 삭제</h3>
+<pre>
+    `createElement`로 만든 요소들을 더 정밀하게 제어하는 방법들입니다.
+    </pre>
+<ul id="food-list">
+    <li id="pasta">파스타</li>
+    <li id="pizza">피자</li>
+</ul>
+
+<script>
+
+</script>
+</body>
+</html>
+
