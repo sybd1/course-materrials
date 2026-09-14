@@ -226,11 +226,31 @@
         <script>
             function searchProducts() {
                 const $searchInput = document.getElementById('search-input');
-                const $result = document.getElementById('search-result');
-                const $products = document.querySelectorAll('product-list li');
-                
-                const keyword = $searchInput.value;
+                const searchValue = $searchInput.value;
+                const filterSearchValue = searchValue.trim().toLowerCase();
+                const $productList = document.querySelectorAll('.product');
+                const $searchResult = document.getElementById('search-result');
 
+                if (filterSearchValue === '') {
+                    $productList.forEach((product) => {
+                        product.classList.remove('matched');
+                    });
+
+                    $searchResult.textContent = '존재하지 않는 상품입니다.';
+                    return;
+                }
+
+                let count = 0;
+
+                for (const product of $productList) {
+                    if (product.textContent.includes(filterSearchValue)) {
+                        product.classList.add('matched');
+                        count += 1;
+                    } else {
+                        product.classList.remove('matched');
+                    }
+                }
+                $searchResult.textContent = `${count}개 일치합니다.`
             }
         </script>
     </section>
