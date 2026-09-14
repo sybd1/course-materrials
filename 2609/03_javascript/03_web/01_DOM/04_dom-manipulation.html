@@ -19,7 +19,17 @@
 </div>
 
 <script>
+    const $area1 = document.getElementById('area1');
+    // innerHTML: 선택한 요소 내부의 HTML을 다루는 프로퍼티
+    console.log($area1.innerHTML);
 
+    // textContent: 문자열을 일반 텍스트로 처리
+    // innerHTML: 문자열을 HTML로 파싱
+    $area1.innerHTML = '<ul><li>새로운 리스트 아이템</li></ul>';
+
+    // 사용자 입력을 그대로 넣으면 XSS 공격에 취약하다.
+    // 사용자가 입력한 값을 출력할 때는 기본적으로 textContent를 우선으로 생각하자.
+    // $area1.innerHTML = `<img src='x' onerror='alert("해킹 공격!")'>'`;
 </script>
 
 <hr>
@@ -29,15 +39,22 @@
     `insertAdjacentHTML`은 기존 내용은 그대로 유지하면서,
     원하는 위치 4곳 중 하나를 지정해 HTML 문자열을 파싱한 노드를 삽입하는 방법입니다.
     </pre>
-<!-- beforebegin -->
+<!-- beforebegin 대상 요소 바깥쪽 앞-->
 <div id="area2" style="border: 2px solid blue; padding: 10px;">
-    <!-- afterbegin -->
+    <!-- afterbegin 대상 요소 안쪽 맨 앞-->
     <p>기존 컨텐츠 </p>
-    <!-- beforeend -->
+    <!-- beforeend 대상 요소 안쪽 맨 뒤-->
 </div>
-<!-- afterend -->
+<!-- afterend 대상 요소 바깥쪽 뒤-->
 
 <script>
+    const $area2 = document.getElementById('area2');
+
+    $area2.insertAdjacentHTML('beforebegin', '<p>div 시작 전(beforebegin)</p>');
+    $area2.insertAdjacentHTML('afterbegin', '<p>div 내부의 가장 앞</p>');
+    $area2.insertAdjacentHTML('beforeend', '<p>div 내부의 가장 끝</p>');
+    $area2.insertAdjacentHTML('afterend', '<p>div 끝난 후</p>');
+
 
 </script>
 
@@ -54,7 +71,28 @@
 </ul>
 
 <script>
+    const $drinkList = document.getElementById('drink-list');
 
+    // 1. createElement로 'li' 요소 노드를 만든다.
+    const $newLi = document.createElement('li');
+
+    // 2. textContent를 이용하여 텍스트를 넣는다.
+    $newLi.textContent = '콜라';
+    console.log($newLi);
+
+    // 3. appendChild로 ul 리스트의 마지막 자식으로 조립.
+    $drinkList.appendChild($newLi);
+
+    // 여러 요소 효율적으로 추가 (DocumentFragment)
+    const $fragment = document.createDocumentFragment();    // 임시 조립 공간
+    ['사이다', '우유'].forEach(text => {
+        const $li = document.createElement('li');
+        $li.textContent = text;
+        $fragment.appendChild($li); // 임시공간에 먼저 조립
+    });
+
+    // 자식들을 fragment에 모은 뒤 실제 DOM에는 한 번에 추가
+    $drinkList.appendChild($fragment);
 </script>
 
 <hr>
@@ -69,7 +107,33 @@
 </ul>
 
 <script>
+    const $foodList = document.getElementById('food-list');
+    const $drinkList2 = document.getElementById('drink-list');
+    const $pasta = document.getElementById('pasta');
+    const $pizza = document.getElementById('pizza');
 
+    // 1. 노드 삽입 (insertBefore)
+    const $newFood = document.createElement('li');
+    $newFood.textContent = '스테이크';
+    // 피자 앞에 스테이크 삽입 - 부모요소.insertBerfore(삽입할노드, 기준노드))
+    // 기준이 되는 $pizza는 반드시 $foodList의 자식 노드여야 한다
+    $foodList.insertBefore($newFood, $pizza);
+
+    // 2. 노드 이동 (appendChild)
+    // 이미 존재하는 '피자'를 drink-list로 옮기기
+    // 같은 노드를 복사하지 않고 실제 위치를 이동시킨다.
+    $drinkList2.appendChild($pizza);    // food-list에서는 자동으로 사라진다
+
+    // 3. 노드 교체 (replaceChild)
+    const $newDrink = document.createElement('li');
+    $newDrink.textContent = '오잉지 쥬스';
+    // 부모요소.replaceChild(새로운노드, 교체할기존노드)
+    $drinkList2.replaceChild($newDrink, $drinkList2.firstElementChild);
+    
+    // 4. 노드 삭제 (removechild)
+    $foodList.removeChild($pasta);
+    $pizza.remove();
+    
 </script>
 </body>
 </html>

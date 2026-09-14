@@ -1,0 +1,65 @@
+260914
+1. 01_dom-selector
+변수를 선언하고 querySelector, getElementById  등 노드를 찾아온다.
+예시) const $me = document.getElementById('me');
+
+2. 02_node-traversal
+찾은 노드는 그 요소를 기준으로 가족(부모, 자식, 형제) 요소를 찾을 수 있다.
+자식 요소
+childNodes, children, firstElementChild, lastElementChild
+부모 요소
+parentNode
+형제 요소
+nextElementSibling, previousElementSibling
+
+3. 03_node-manipulation
+nodeValue: 프로퍼티는 텍스트 노드의 요소를 완벽하게 찾아서 오직 텍스트 노드만을 변경할 수 있다.
+textContent: 프로퍼티로 요소 전체의 텍스트 노드를 찾아 변경 가능하다.
+
+4. 04_dom-manipulation
+innerHTML: 문자열을 HTML로 파싱하여 요소 내부의 전체 HTML까지 포함한 모든 것을 변경가능하다.
+악의적인 XSS 보안 위험이 있다. ???????????????
+사용자가 직접 입력창에 코드를 입력하면 실행되는 것인가?
+
+insertAdjacentHTML 원하는 위치에 HTML 문자열을 parsing한 노드를 삽입하는 방법
+beforebegin: 요소 앞
+afterbigin: 내부 가장 앞
+beforeend: 내부 가장 끝
+afterend: 요소 뒤
+
+- 요소를 원하는 위치에 변경하는 법
+insertBefore: 노드 삽입
+appendChild: 노드 이동
+replaceChild: 노드 교체
+removechild: 노드 삭제
+
+createElement 요소 노드를 만든다.
+->
+textContent 등을 이용해 원하는 내용을 만든 노드에 추가한다.
+->
+appendChild로 만든 노드와 추가한 내용을 조립한다. 대상은 부모 노드 기준으로 추가해야한다.
+
+createDocumentFragment: 임시 조립 공간
+이 임시 조립 공간 만드는 문법과 개념 이해하기
+
+5. 05_attribute-and-property
+HTML 요소의 attribute(속성) type, id, value
+DOM 객체의 속성은 property
+
+- attribute 기본 조작 방법
+읽기: getAttribute('어트리뷰트이름') / 값이 존재하지 않으면 'null'을 반환한다.
+쓰기: setAttribute('어트리뷰트이름', '새로운값')
+확인: hasAttribute('어트이뷰트이름')
+삭제: removeAttribute('어트리뷰트이름')
+
+value attribute: HTML 마크업 텍스트 문서에 직접 작성된 초깃값(Deafalf Value). 사용자가 화면에서 글자를 입력하고 지워도 절대 변하지 않고 고정된다.
+value property: 브라우저 메모리에 파싱되어 올라간 DOM 객체의 '현재 실시간 값(Current Value)'
+
+7. 07_css-manipulation
+CSS 조작하는 법
+변수.style.디자인 = ''
+
+className: 기존 클래스 아예 싹 밀고 새 클래스로 덮어 씌울때
+classList: add, remove, toggle, contains repalce 전용 메서드로 개별 클래스 조작할때. 실무에서는 거의 대부분 이 방식을 사용한다.
+
+

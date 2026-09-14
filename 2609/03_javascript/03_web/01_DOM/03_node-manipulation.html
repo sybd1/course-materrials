@@ -22,7 +22,16 @@
 <div id="info-area">div 안의 텍스트</div>
 
 <script>
+    const $infoArea = document.getElementById('info-area');
+    const $textInside = $infoArea.firstChild;
 
+    console.log($infoArea);     // div 요소 노드
+    console.log($textInside);   // 'dive 안의 텍스트' 라는 텍스트 노드
+    
+
+    // .nodeType: 노드의 종류를 숫자로 알려준다(1: 요소, 3: 텍스트, 9: 문서)
+    console.log($infoArea.nodeType);
+    console.log($textInside.nodeType);
 </script>
 
 <hr>
@@ -41,7 +50,14 @@
     </pre>
 <div id="value-area">nodeValue</div>
 <script>
+    const $valueArea = document.getElementById('value-area');
+    const $valueText = $valueArea.firstChild;
 
+    console.log($valueArea);
+    console.log($valueArea.nodeValue);  // null, 요소 노드 자체의 nodeValue는 null이다. (불편!) 오직 '텍스트 노드'만 값을 찾아온다.
+
+    // 텍스트를 바꾸려면, 자식인 '텍스트 노드'를 직접 찾아가야 한다
+    $valueText.nodeValue = 'nodeValue로 변경 완료!!!'
 </script>
 
 <h4>(2) 요소 전체의 텍스트를 다루는 `.textContent`</h4>
@@ -55,7 +71,11 @@
 <div id="content-area">여기는 <b>굵은</b> 글씨가 있는 영역입니다.</div>
 
 <script>
+    // 요소 자체의 마크업이 아니라 요소와 자손 노드의 텍스트 내용을 가져온다.
+    const $contentArea = document.getElementById('content-area');
+    console.log($contentArea.textContent);
 
+    $contentArea.textContent = 'textContent로 쉽게 변경완료!! <span>태그는?</span>';
 </script>
 
 <hr>

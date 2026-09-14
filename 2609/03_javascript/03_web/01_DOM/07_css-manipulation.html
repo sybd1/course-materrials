@@ -32,7 +32,12 @@
 <div id="box1">첫 번째 박스</div>
 
 <script>
+    const $box1 = document.getElementById('box1');
 
+    // .style 프로퍼티로 인라인 스타일 직접 작성
+    $box1.style.width = '200px';
+    $box1.style.height =  '100px';
+    $box1.style.backgroundColor = 'pink';
 </script>
 
 <hr>
@@ -48,7 +53,40 @@
 <button id="toggleBtn">배경색 토글</button>
 
 <script>
+    const $box2 = document.getElementById('box2');
+    const $changeBtn = document.getElementById('changeBtn');
+    const $toggleBtn = document.getElementById('toggleBtn');
 
+    // .className에 새 문자열을 대입하면 기존 클래스 전체가 교체된다(유의할점!!)
+    // .className: DOM 요소 전체 클래스 문자열을 확인
+    console.log($box2.className);   // box, 단순 문자열
+    // $box2.classList = 'circle';
+
+    console.log($box2.classList);   // DOMTokenList (객체)
+
+    $changeBtn.onclick = () => {
+        // .add(): 클래스를 추가한다
+        $box2.classList.add('circle', 'red-bg', 'big-text');
+        console.log('추가 후: ', $box2.classList);
+
+        // .remove(): 클래스 제거한다
+        $box2.classList.remove('circle');
+    };
+
+    $toggleBtn.onclick = () => {
+        // .togle(): 클래스가 있으면 제거, 없으면 추가한다. 실행하면 true 닫으면 false값이 반환된다.
+        const isAdded = $box2.classList.toggle('red-bg');
+        console.log(isAdded);
+
+        if (isAdded) {
+            $toggleBtn.textContent = '배경색 제거';
+        } else {
+            $toggleBtn.textContent = '배경색 적용';
+        }
+    };
+
+    // .contains(): 특정 클래스가 있는지 확인 (true/false)
+    console.log(`box2가 'box'클래스를 가지고 있나요?`, $box2.classList.contains('box'));
 </script>
 </body>
 </html>

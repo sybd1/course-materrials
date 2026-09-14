@@ -19,6 +19,22 @@
 <input type="text" id="username" value="user01">
 
 <script>
+    const $input = document.getElementById('username');
+
+    // 읽기: getAttribute('어트리뷰트이름')
+    const inputValue = $input.getAttribute('value');
+    console.log(inputValue);
+
+    // 쓰기: setAttribute('어트리뷰트이름', '새로운값')
+    $input.setAttribute('value', 'new-user');
+    $input.setAttribute('class', 'user-input');
+
+    // 확인: hasAttribute('어트이뷰트이름')
+    console.log($input.hasAttribute('class'));
+    console.log($input.hasAttribute('name'));
+
+    // 삭제: removeAttribute('어트리뷰트이름')
+    $input.removeAttribute('value');
 
 </script>
 
@@ -36,7 +52,28 @@
 <input type="text" id="nickname" value="JSBeginner">
 
 <script>
+    const $nickname = document.getElementById('nickname');
+    console.log($nickname.getAttribute('value'));
+    console.log($nickname.value);
 
+    $nickname.oninput = () => {
+        // .value 프로퍼티는 사용자의 입력을 실시간으로 반영
+        console.log('프로퍼티: ', $nickname.value);
+        // .getAttribute('value')는 HTML에 적힌 초기값을 유지
+        console.log('어트리뷰트: ', $nickname.getAttribute('value'));
+    };
+
+    $nickname.value = '새로운 닉네임';
+
+    // (참고) checkbox의 경우, 프로퍼티는 boolean, 어트리뷰트는 문자열로 타입이 다를 수 있다.
+    const $checkbox = document.createElement('input');
+    $checkbox.type = 'checkbox';
+    $checkbox.setAttribute('checked', '');
+    // 어트리뷰트로 읽기
+    console.log($checkbox.getAttribute('checked')); // ''
+    // 프로퍼티로 읽기 (boolean값 반환)
+    console.log($checkbox.checked); // true
+    $checkbox.checked = false;
 </script>
 
 <hr>
@@ -56,7 +93,9 @@
 </ul>
 
 <script>
+    const $boardList = document.querySelector('.board-list');
 
+    $boardList.onclick = () => {}
 </script>
 
 </body>

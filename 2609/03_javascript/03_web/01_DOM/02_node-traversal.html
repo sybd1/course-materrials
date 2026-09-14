@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>node-traversal</title>
 </head>
+
 <body>
     <h1>'HTML 가계도' 탐색하기</h1>
     <pre>
@@ -18,15 +20,49 @@
         </pre>
 
     <ul id="family">
-        <!-- 이 주석과 줄바꿈도 노드입니다! -->
+        <!-- 이 주석과 줄바꿈, 공백도 노드입니다! -->
         <li id="me">나 (기준)</li>
         <li>나의 첫째 형제</li>
         <li>나의 둘째 형제</li>
     </ul>
 
     <script>
+        const $me = document.getElementById('me');
+        // childNodes: 모든 '자식 요소'들을 NodeList로 반환(공백/텍스트/주석 노드 포함)
+        const $family = document.getElementById('family');
+        console.log($family.childNodes);
 
-</script>
+        console.log('===========자식 요소 탐색===========');
+        // children: 모든 '자식 요소'들을 HTMLCollection으로 반환(텍스트 노드 제외)
+        const $children = $family.children;
+        console.log($children);
+
+        // firstElementChild: 첫 번째 '자식 요소' 반환
+        const $first = $family.firstElementChild;
+        console.log($first);
+        $first.style.color = 'red';
+
+        // lastElementChild: 마지막 '자식 요소' 반환
+        const $last = $family.lastElementChild;
+        console.log($last);
+
+        console.log('\n===========부모 요소 탐색===========');
+        // parentNode: 나의 '부모 노드' 반환
+        // HTML 요소를 기준으로 다룰 때는 parentElement도 자주 사용
+
+        const $parent = $me.parentNode;
+        console.log($parent);
+        $parent.style.border = '1px solid blue';
+
+        console.log('\n===========형제 요소 탐색===========')
+        // 찾으려고 하는 자리에 다음 요소가 없다면 null 값을 반환
+        // nextElementSibling: 나의 바로 다음 '형제 요소' 반환
+        const $next = $me.nextElementSibling;
+        console.log($next);
+        // previousElementSibling: 나의 바로 이전'형제 요소' 반환
+        const $prev = $next.previousElementSibling;
+        console.log($prev);
+    </script>
 </body>
-</html>
 
+</html>
