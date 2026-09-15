@@ -1,50 +1,136 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>폼 이벤트 다루기</title>
     <style>
-        form { border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], textarea { width: 300px; padding: 5px; }
-        .focused { outline: 2px solid gold; }
-        .error { color: red; font-size: 12px; }
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 300px;
+            padding: 5px;
+        }
+
+        .focused {
+            outline: 2px solid gold;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
     </style>
 </head>
+
 <body>
-<h1>폼(Form) 이벤트 다루기</h1>
-<pre>
+    <h1>폼(Form) 이벤트 다루기</h1>
+    <pre>
     사용자가 입력한 데이터를 받고, 검증하고, 서버에 제출하는 웹의 핵심 기능입니다.
     </pre>
 
     <!-- 성공하면 action에 있는 url로 데이터 전송된다. 수업 중 실제 이동을 막고 싶다면 submit 성공 시에도 preventDefault를 호출하면 된다. -->
-<form name="joinForm" action="https://example.com/join" method="GET">
-    <div class="form-group">
-        <label for="username">이름</label>
-        <input type="text" name="username" id="username" value="홍길동">
-    </div>
+    <form name="joinForm" action="https://example.com/join" method="GET">
+        <div class="form-group">
+            <label for="username">이름</label>
+            <input type="text" name="username" id="username" value="홍길동">
+        </div>
 
-    <div class="form-group">
-        <label>관심사 (2개 이상 선택)</label><br>
-        <input type="checkbox" name="hobby" value="exercise"> 운동
-        <input type="checkbox" name="hobby" value="music"> 음악
-        <input type="checkbox" name="hobby" value="movie"> 영화
-    </div>
+        <div class="form-group">
+            <label>관심사 (2개 이상 선택)</label><br>
+            <input type="checkbox" name="hobby" value="exercise" checked> 운동
+            <input type="checkbox" name="hobby" value="music"> 음악
+            <input type="checkbox" name="hobby" value="movie"> 영화
+        </div>
 
-    <div class="form-group">
-        <label for="introduce">자기소개 (<span id="char-counter">0</span>/100자)</label>
-        <textarea name="introduce" id="introduce" rows="4" maxlength="100"></textarea>
-    </div>
+        <div class="form-group">
+            <label for="introduce">자기소개 (<span id="char-counter">0</span>/100자)</label>
+            <textarea name="introduce" id="introduce" rows="4" maxlength="100"></textarea>
+        </div>
 
-    <button type="submit">회원가입</button>
-    <p class="error"></p>
-</form>
+        <button type="submit">회원가입</button>
+        <p class="error"></p>
+    </form>
 
-<script>
+    <script>
+        // 폼 선택: document.forms.폼name속성값
+        const $form = document.forms.joinForm;
+        // 폼에 포함된 입력 요소는 name으로 가져올 수 있다.
+        const $username = $form.username;
+        const $hobbies = $form.hobby;
+        console.log($hobbies);
+        console.log($hobbies[0].checked);   // 체크 상태에 따라 true, false
+        const $introduce = $form.introduce;
 
-</script>
+        const $counter = document.getElementById('char-counter');
+        const $error = document.querySelector('.error');
+
+        // focus & blur: 요소에 포커스가 가거나 벗어났을 때
+        $username.addEventListener('focus', (e) => {
+            e.target.classList.add('focused');
+        });
+        $username.addEventListener('blur', (e) => {
+            e.target.classList.remove('focused');
+        });
+
+        // input: 사용자가 값을 변경할 때마다
+        $introduce.addEventListener('input', (e) => {
+            const currentLength = e.target.value.length;
+            $counter.textContent = currentLength;
+        });
+
+        // 폼 제출 (submit) 이벤트 제어
+        $form.addEventListener('submit', (e) => {
+            console.log('submit 이벤트 발생!')
+
+            // 이름 유효성 검사
+            if ($username.value.trim().length < 2) {
+                e.preventDefalt(); // 기본 동작을 막음
+                $error.textContent = '이름은 2글자 이상 입력해주세요.';
+                return;
+            }
+            // 관련성 유효성 검사
+            const checkedCount =
+            Array.form($hobbies)
+            .filter((hobby) => hobby.checked)
+            .length;
+
+        //     let checkedCount = 0;
+
+        //     Array.from($hobbies).forEach(hobby => {
+        //         if (hobby.checked) {
+        //             checkedCount++;
+        //         }
+        //     });
+
+            if (checkedCount < 2) {
+                e.preventDefalt();
+                $error.textContent = '관심사는 2개 이상 선택해주세요~';
+                return
+            }
+
+            $error.textContent = '';
+            alert('회원가입 성공! 서버로 제출합니다.');
+        });
+
+
+
+    </script>
 </body>
+
 </html>
-
-

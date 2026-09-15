@@ -1,63 +1,105 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>이벤트 핸들링</title>
 </head>
+
 <body>
-<h1>이벤트 핸들러 등록 및 제거</h1>
+    <h1>이벤트 핸들러 등록 및 제거</h1>
 
-<hr>
+    <hr>
 
-<h3>방법 1. 이벤트 핸들러 어트리뷰트 (구식)</h3>
-<pre>
+    <h3>방법 1. 이벤트 핸들러 어트리뷰트 (구식)</h3>
+    <pre>
     HTML 태그에 `onclick` 같은 어트리뷰트를 직접 작성하는 옛날 방식입니다.
     HTML과 JavaScript 코드가 섞여서 유지보수가 어렵기 때문에, 현재는 사용하지 않는 것이 좋습니다.
     </pre>
-<button onclick="alert('첫 번째 버튼 클릭!');">방법 1 버튼</button>
+    <button onclick="alert('첫 번째 버튼 클릭!');">방법 1 버튼</button>
 
-<hr>
+    <hr>
 
-<h3>방법 2. 이벤트 핸들러 프로퍼티 (과도기)</h3>
-<pre>
+    <h3>방법 2. 이벤트 핸들러 프로퍼티 (과도기)</h3>
+    <pre>
     요소 객체의 `onclick` 프로퍼티에 함수를 직접 할당하는 방식입니다.
     HTML과 JS를 분리했다는 점에서는 발전했지만, <b>하나의 이벤트에 오직 하나의 임무만 부여</b>할 수 있다는
     치명적인 단점이 있습니다.
     </pre>
 
-<button id="btn2">방법 2 버튼</button>
-<script>
+    <button id="btn2">방법 2 버튼</button>
+    <script>
+        const $btn2 = document.getElementById('btn2');
+        $btn2.onclick = function () {
+            console.log('첫 번째 임무 수행!');
+        };
+        // onclick 프로퍼티에는 함수 하나만 저장 할 수 있는 변수 같은 공간이기 때문에
+        // 나중에 대입한 함수가 이전 함수를 대체한다.
+        $btn2.onclick = function () {
+            alert('두 번째 임무 수행!');
+        };
+    </script>
 
-</script>
+    <hr>
 
-<hr>
-
-<h3>방법 3. `addEventListener` (현대적인 표준)</h3>
-<pre>
+    <h3>방법 3. `addEventListener` (현대적인 표준)</h3>
+    <pre>
     `element.addEventListener('이벤트종류', 실행할함수)` 형태로 사용하는,
     가장 강력하고 유연한 현대적인 표준 방식입니다.
     </pre>
 
-<button id="btn3">방법 3 버튼</button>
-<script>
+    <button id="btn3">방법 3 버튼</button>
+    <script>
+        const $btn3 = document.getElementById('btn3');
+        // 요소.addEventListener('이벤트종류', 실행할함수)
+        $btn3.addEventListener('click', function () {
+            console.log('첫 번째 임무 수행!');
+        });
 
-</script>
+        $btn3.addEventListener('click', () => {
+            alert('두 번째 임무 수행!');
+        });
+    </script>
 
-<hr>
+    <hr>
 
-<h3>이벤트 핸들러 제거하기</h3>
-<pre>
+    <h3>이벤트 핸들러 제거하기</h3>
+    <pre>
     이벤트를 제거할 때는 '어떤 임무'를 제거할지 정확히 알려줘야 합니다.
     따라서 제거하려는 함수는 반드시 이름이 있거나 변수에 담겨있어야 합니다.
     </pre>
 
-<button id="btn4">추가/제거 버튼</button>
-<button id="addBtn">임무 추가</button>
-<button id="removeBtn">임무 제거</button>
+    <button id="btn4">추가/제거 버튼</button>
+    <button id="addBtn">임무 추가</button>
+    <button id="removeBtn">임무 제거</button>
 
-<script>
+    <script>
+        const $btn4 = document.getElementById('btn4');
+        const $addBtn = document.getElementById('addBtn');
+        const $removeBtn = document.getElementById('removeBtn');
 
-</script>
+        // 나중에 제거해야 하는 핸들러는 반드시 함수의 참조를 보관한다(표현식)
+        const mission = () => {
+            alert('특수 임무 수행 완료!');
+        };
+
+        $addBtn.addEventListener('click', () => {
+            $btn4.addEventListener('click', mission);
+            console.log('btn4에 임무가 추가되었습니다.');
+        });
+
+        $removeBtn.addEventListener('click', () => {
+            $btn4.removeEventListener('click', mission);
+            console.log('btn4에서 임무가 제거되었습니다.');
+        });
+
+
+        // $btn4.addEventListener('click', () => {alert('임무')});
+
+        // 익명함수는 제거할 수 없다. 위의 함수와 다른 함수로 취급된다.
+        // $btn4.removeEventListener('click', () => {alert('임무')});
+
+    </script>
 </body>
-</html>
 
+</html>

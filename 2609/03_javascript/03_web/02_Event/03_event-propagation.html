@@ -25,6 +25,19 @@
 </ul>
 
 <script>
+    const $parent = document.getElementById('parent');
+    const $child = document.getElementById('child');
+
+    $parent.addEventListener('click', (e) => {
+        alert('부모(ul)가 클릭을 감지했습니다.');
+        console.log('----부모핸들러-----');
+        console.log('e.target:', e.target); // 이벤트가 실제로 시작된 요소
+        console.log('e.currentTarget:', e.currentTarget); // 이벤트 핸들러가 등록된 요소
+    });
+
+    $child.addEventListener('click', (e) => {
+        alert('자삭(li)이 클릭되었습니다!');
+    });
 
 </script>
 
@@ -38,14 +51,55 @@
     </pre>
 
 <ul id="drink-list">
-    <li>커피</li>
+    <li><strong>커피</strong></li>
     <li>콜라</li>
     <li>우유</li>
 </ul>
 <button id="add-btn">음료 추가</button>
 
 <script>
+    // 개별로 하나씩 이벤트 핸들러 등록하는 방식
+    // const $items = document.querySelectorAll('#drink-list li');
+    // console.log($items);
+    // $items.forEach(($item) => {
+    //     $item.addEventListener('click', () => {
+    //         $item.classList.toggle('highlight');
+    //     });
+    // });
 
+    // 이벤트 위임 적용!
+    const $drinkList = document.getElementById('drink-list');
+    const $addBtn = document.getElementById('add-btn');
+
+    function highlight(element) {
+        element.classList.toggle('highlight');
+    }
+    // 이벤트 위임 활용
+    // 각 li가 아닌, 부모 ul에 이벤트 핸들러를 딱 한 번 등록
+    $drinkList.addEventListener('click', (e) => {
+
+        // closest: 자신부터 포함한 가장 가까운 전달된 요소(li)를 찾는다.
+        const $item = e.target.closest('li');   // 찾지 못하면 null을 반환
+
+        if (!$item) return;
+        if (!$drinkList.contains($item)) return;
+
+        highlight($item);
+
+        console.log('클릭된 요소:', e.target);
+
+        // 내가 원하는 li를 클릭했을 때만 적용하기 위한 안전장치
+        // if (e.target.matches('li')) {
+        //     highlight(e.target);
+        // }
+    });
+    // 나중에 동적으로 추가되는 자식요소에도 이벤트 핸들러가 자동으로 동작한다
+    $addBtn.addEventListener('click', () => {
+        const $newLi = document.createElement('li');
+        $newLi.textContent = '사이다';
+
+        $drinkList.appendChild($newLi);
+    })
 </script>
 </body>
 </html>

@@ -66,7 +66,21 @@
 </div>
 
 <script>
+    const $productList = document.querySelector('.product-list');
+    const $infoPanel = document.querySelector('.info-panel');
 
+    $productList.addEventListener('click', (e) => {
+        const clickedItem = e.target.closest('.product-item');
+
+        if (clickedItem) {
+            const productId = clickedItem.dataset.productId;
+            const price = clickedItem.dataset.price;
+
+            $infoPanel.innerHTML = `
+                선택된 상품 ID: <span>${productId}</span> <br>
+                선택된 상품 ID: <span>${Number(price).toLocaleString()}원</span>`;
+        }
+    });
 </script>
 </body>
 </html>
