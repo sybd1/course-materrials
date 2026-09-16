@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // 기존 방식의 명령형 프로그래밍
+        // const h1 = document.createElement('h1');
+        // h1.className = 'greeting';
+        // h1.textContent = '안녕~~~';
+        // document.getElementById('root').appendChild(h1);
+
+        console.log(React); // 여러 기능이 들어있는 자바스크립트 객체
+
+        // React.createElement('태그명', {'속성 객체'}, '자식 내용');
+        // 실제 DOM 노드가 아니고 React Element이다.
+        const greeting = React.createElement('h1', {className: 'greeting'}, '안녕, 리액트!');
+
+        console.log(greeting);
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(greeting);
+    </script>
+</body>
+
+</html>

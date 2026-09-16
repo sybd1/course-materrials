@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        /**
+         * Props: 부모 컴포넌트가 자식 컴포넌트에게 데이터를 전달하는 '통로'
+         * - 읽기 전용 데이터이다.(자식은 Props를 수정할 수 없음)
+         * - 데이터는 항상 위에서 아래로 흐릅니다. (부모 -> 자식)
+         * - 함수의 매개변수처럼 생각하면 쉽다. 부모가 값을 넘기고, 자식은 받은 값을 사용한다.
+         */
+
+        function Greeting({ name = '기본이름', favoriteNumber=99, children }) {
+            return (
+                <>
+                    <h1> 안녕하세요, {name}님! </h1>
+                    <h2>제가 좋아하는 숫자는 {favoriteNumber} 입니다.</h2>
+                    <strong>전달된 자식 요소(children): {children}</strong>
+                </>
+            );
+        }
+
+        function App() {
+            const name1 = '홍길동';
+            const name2 = '유관순';
+
+            return (
+                <>
+                    {/* 태그 사이에 작성한 내용은 props.children으로 전달 된다. */}
+                    <Greeting name={name1} favoriteNumber={5}>props 공부중!</Greeting>
+                    <Greeting name={name2} favoriteNumber={215}>
+                        <div>여러 줄도 가능</div>
+                        <div>React 최고~</div>
+                    </Greeting>
+                    <Greeting>props를 넘기지 않으면 기본값이 적용됩니다.</Greeting>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root'))
+            .render(<App />);   // 변수나 숫자같은 JS 값을 넘길 때는 {}사용
+        // 컴포넌트 태그에 적은 것들은 children에 저장된다?
+    </script>
+</body>
+
+</html>

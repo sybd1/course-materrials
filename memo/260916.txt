@@ -1,0 +1,129 @@
+260916
+
+???????
+객체리터럴 뭐였더라????????
+if문은 기본적으로 첫번째 값이 true이고, else 이후 값은 false인 것인가? 맞다. 그러니까 조건식이다.
+수시로 저장을 누르는 습관은 좋지 않은가? 한 문장에 한 번씩
+
+e.preventDefault()는 링크/폼뿐만 아니라 체크박스, 라디오 버튼, 텍스트 입력창 등 브라우저가 제공하는 모든 UI 컨트롤의 '기본 변화'를 차단할 수 있다. 다만 location.reload로 새로고침 명령을 하면 작동한다.
+
+Timer
+1. Timer - 01_asynchronous
+자바스크립트 엔진은 싱글 스레드다
+- 동기 처리 방식은 여러 가지 일이 있으면 순서대로 천천히 해결하게 된다. 앞선 작업이 끝날때까지 다음 작업이 대기해야 하는 Blocking 문제가 일어난다.
+
+- 비동기 처리 방식
+- setTimeout: 콜백함수를 예약을 걸어 원하는 시간에 실행시킬 수 있는 함수
+기본 문법 : const intervalId = setTimeout(() => {}, 1000);
+</script>
+- clearTimeout: 예약을 실행시키지 않는 함수?
+- setInterval: 예약을 계속 반복해서 실행시키는 함수
+
+- 비동기 처리 과정
+ 1) Call Stack: 자바스크립트 메인 엔진
+ 2) Web API: 브라우저
+ 3) Task Queue: 기다리고 있던 콜백함수가 Event Loop를 통해 Call Stack으로 보내진다.
+ 4) Event Loop: Call Stack이 비어있으면 Web API에게 받은 콜백 함수를 Call Stack에게 전달한다.
+
+
+
+
+BOM
+2. 01_browser-object-model
+브라우저 자체를 다루는 방법
+
+가장 큰 객체 window
+HTML문서 document
+원래는 window.document.getElemetById
+window.alert
+
+- alert('입력할내용');
+- confirm('입력할내용'); : 확인 취소가 나오며 boolean값이 반환된다. if문을 사용해 true/false 순으로 텍스트를 출력할 수도 있다.
+- prompt('입력할내용') : 확인을 누르면 문자열이 반환되고, 취소를 누르면 null값이 반환된다.
+
+location 객체
+- location.href = "주소"; : 주소창으로 가는 메서드
+- location.replace("주소"); : 현재 페이지를 새 페이지로 대체하는 메서드. 방문 기록에 남지 않는다.
+- location.reload(); 새로고침하는 메서드
+
+history 객체
+- .back : 뒤로 가기
+- .forward : 앞으로 가기
+- .go : 2페이지 뒤로 가기
+
+브라우저/화면 정보 얻을 수 있는 객체
+- navigator. : 브라우저 종류, 운영체제 등 정보를 얻을 수 있다. 마치 브라우저 소개글.
+- screen : 사용자의 화면 정보를 얻을 수 있다.
+
+
+
+
+3. React
+지금까지 HTML, CSS, JS는 명령형 프로그래밍
+
+React는 선언형 프로그래밍
+여러 기능이 들어있는 자바스크립트 객체
+JS의 라이브러리
+- Element: React 내에서 만들어지는 가상 DOM개념. 가상 DOM에서 만들어진 요소.
+- Component: 
+- Virtual DOM : 실제 돔을 건드리지 않고, 가상 돔을 만들어 이전화면과 새로운 화면을 비교해서 변경하는 효율적인 방법.
+- JSX : JS의 확장 문법. 직관적이고 쉽게 코드 작성 가능.
+
+React 과정
+DOM tree 방식은 요소 값 하나만 바뀌어도 페이지 전체가 동작하고, Virtual DOM은 그 부분만 Diffing하여 변경 값의 레이아웃만 수정하고 화면에 나타낸다(Re-rendering과정).
+DOM Tree와 CSSOM Tree를 합쳐서 Render Tree를 생성한다.
+
+CDN : 코드덩어리, 프로젝트가 아닌 임시로 사용하는 React 라이브러리가 담긴 코드
+
+HTML에서 React 흉내내는법
+React CDN
+babel CDN : JSX언어를 JS로 번역해준다.
+
+
+
+
+4.01_component-and-jsx
+
+컴포넌트
+JSX 방식
+function NewWay() {
+            return (
+                <div>
+                    <h1 className='greeting'>JSX방식</h1>
+                    <p>HTML처럼 보여서 훨씬 직관적이다!!</p>
+                </div>
+            );
+        }
+
+컴포넌트 합성할땐 <></> 빈칸 안에 합성할 컴포넌트를 넣어준다.
+
+
+
+
+
+5. 02_JSX JSX
+- 기본적으로 모든 컴포넌트 이름은 앞글자 대문자
+- 카멜케이스 잘지키기
+- 자바스크립트 표현식은 중괄호 안에 {  } 넣어야한다.
+- 인라인 스타일은 '객체' 형태로 전달해야 한다.????????????????????
+- 모든 태그는 반드시 닫혀야 한다.
+
+
+
+
+6. 03_rendering-and-vdom
+- 가상 DOM 덕분에 1초마다 바뀌는 시계도 쉽게 만들 수 있다. 모든 페이지가 새로고침 되는 것이 아니라, 바뀐 부분만 계속 새로고침 되게 만들 수 있다.
+
+
+
+
+7. 01_props 읽기 전용 데이터
+props = properties
+- 부모 컴포넌트가 자식 컴포넌트에게 데이터를 전달하는 '통로'
+- 부모가 준 정보를 읽을 수만 있고, 수정할 수는 없다.
+- // 컴포넌트 태그에 적은 것들은 children에 저장된다???????????
+
+- 태그처럼 키 값을 적을 수 있다.
+- 태그 사이에 작성한 내용은 props.children으로 전달 된다.
+
+State 쓰기 가능

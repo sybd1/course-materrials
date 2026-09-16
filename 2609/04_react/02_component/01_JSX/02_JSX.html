@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const user = {
+            name: '홍길동',
+            age: 20
+        }
+
+        function introduce(user) {
+            return `안녕하세요, 저는 ${user.name}이고 ${user.age}세 입니다.`;
+        }
+
+        function handleClick() {
+            alert('버튼이 클릭되었습니다!');
+        }
+        
+        const customStyle = {
+            backgroundColor: 'cornflowerblue',
+            color: 'white',
+            padding: '10px',
+            borderRadius: '5px'
+        };
+
+        function JsxRules() {
+            return (
+                <>
+                    {/*JSX 내부 주석*/}
+                    <h2>1. { }안에 자바스크립트 표현식을 넣을 수 있다.</h2>
+                    <h3>이름: {user.name}</h3>
+                    <p>소개: {introduce(user)}</p>
+
+                    <h2>2. HTML 속성과 약간 다른 규칙을 따른다.</h2>
+                    {/* class -> className, onclick -> onClick */}
+                    <button className='my-button' onClick={handleClick}>
+                        클릭해보세요
+                    </button>
+
+                    <h2>3. 인라인 스타일은 '객체' 형태로 전달해야 한다.</h2>
+                    <p style={customStyle}>
+                        이 문단에는 커스텀 스타일이 적용되었습니다.
+                    </p>
+
+                    <h2>4. 모든 태그는 반드시 닫혀야 한다.</h2>
+                    한 줄짜리 태그도 예외는 없어요. <br/> <hr/> <input/>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<JsxRules />);
+
+    </script>
+</body>
+
+</html>

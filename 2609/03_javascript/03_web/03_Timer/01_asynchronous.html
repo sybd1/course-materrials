@@ -15,7 +15,16 @@
 <button id="sync-btn">동기 작업 시작 (3초 멈춤!)</button>
 <button id="test-btn">반응 테스트</button>
 <script>
+    function sleep(delay) {
+        const delayUntil = Date.now() + delay;
+        while(Date.now() < delayUntil);
+    }
 
+    document.getElementById('sync-btn').addEventListener('click', () => {
+        console.log('동기 작업 시작...');
+        sleep(3000);
+        console.log('동기 작업 완료!');
+    })
 </script>
 
 <hr>
@@ -28,12 +37,28 @@
 
 <h4>setTimeout: "조금 이따가, 딱 한 번만 해줘!"</h4>
 <script>
+    // 3초 뒤에 이 함수를 실행해줘 라고 "예약" 을 걸어둔다
+    const timerId = setTimeout((name) => {
+        console.log(`${name}, 3초가 지났습니다.`);
+    }, 3000, "강사님");
 
+    console.log('타이머는 예약되었습니다.');
+
+    // 타이머 취소
+    clearTimeout(timerId);
 </script>
 
-<h4>setInterval: "계속 반복해서 해줘!" (feat. clearInterval)</h4>
+<!-- <h4>setInterval: "계속 반복해서 해줘!" (feat. clearInterval)</h4>
 <script>
+    let count =1;
+    const intervalId = setInterval(() => {
+        console.log(`${count}초`);
 
+        if(count++ === 5) {
+            clearInterval(intervalId);
+            console.log('setInterval 반복이 중지되었습니다.');
+        }
+    }, 1000); -->
 </script>
 
 <hr>
@@ -44,14 +69,17 @@
     하지만 주방 보조(브라우저)는 타이머, 네트워크 요청 등 여러 일을 동시에 할 수 있는 '멀티 스레드'이죠.
 
     비동기 처리 과정은 다음과 같습니다.
-    1. <b>Call Stack (메인 주방):</b> 요리사가 현재 하고 있는 작업 공간.
-    2. <b>Web API (주방 보조):</b> 요리사가 `setTimeout` 같은 오래 걸리는 일을 주방 보조에게 맡깁니다.
-    3. <b>Task Queue (주문서 목록):</b> 주방 보조가 일을 끝내면 (타이머 만료 등), "작업 끝났습니다!" 라는 주문서(콜백 함수)를 여기에 올려둡니다.
-    4. <b>Event Loop (주방 매니저):</b> 매니저는 계속해서 메인 주방(Call Stack)을 감시하다가, 요리사가 모든 일을 마치고 쉬고 있을 때,
-       주문서 목록(Task Queue)에서 가장 오래된 주문서를 가져와 요리사에게 전달합니다. 그러면 요리사가 그 일을 처리하죠.
+    1. <b>Call Stack (메인 주방):</b> JavaScript 엔진이 지금 실행 중인 작업 공간
+    2. <b>Web API (주방 보조):</b> 브라우저가 제공하는 타이머, 이벤트, 네트워크 처리 공간
+    3. <b>Task Queue (주문서 목록):</b> 비동기 작업이 끝난 뒤 실행 대기 중인 콜백들이 줄 서는 공간
+    4. <b>Event Loop (주방 매니저):</b> Call Stack이 비었는지 확인하고, Queue의 콜백이 다시 Stack으로 올려주는 관리자
     </pre>
 <script>
+    console.log('Event Loop 시작!');
 
+    setTimeout(() => console.log('Event Loop: 타이머 완료!(Task Queue)'), 0);
+
+    console.log('Event Loop: 끝!');
 </script>
 </body>
 </html>
