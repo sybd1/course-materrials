@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function SignupFormBasic() {
+
+            const [username, setUsername] = useState('');
+            const [email, setEmail] = useState('');
+
+            const handleSignup = () => {
+                alert(`아이디: ${username}\n이메일: ${email}\n 회원가입 완료!`)
+                setUsername('');
+                setEmail('');
+            }
+
+            return (
+                <>
+                    <h2> 기본적인 이벤트 처리 </h2>
+                    <input
+                        type="text"
+                        placeholder="아이디"
+                        value={username}
+                        // value와 onChange를 함께 연결하면 input 값이 React state에 의해 관리된다.
+                        // onChange: 'input의 내용물에 변화가 생길 때마다'
+                        // e.target.value: 이벤트를 일으킨 장본인(e.target)이 가지고 있는 최신 값(value)
+                        onChange={e => setUsername(e.target.value)}
+                    />
+                    <input
+                        type="email"
+                        placeholder="이메일"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <button onClick={handleSignup}>가입하기</button>
+                </>
+            )
+        }
+
+        // 하나의 객체 state로 여러 input을 관리하는 방식
+        function SignupFormAdvanced() {
+            const [form, setForm] = useState({
+                username: '',
+                email: ''
+            });
+
+            // 구조분해할당
+            const { username, email } = form;
+
+            const hadleChange = (e) => {
+                // console.log(e.target);
+
+                // name은 어떤 input에서 이벤트가 발생했는지 구분하는 이름
+                // value는 사용자가 입력한 최신 값
+                const { name, value } = e.target;
+                console.log(name,value);
+
+                setForm({
+                    ...form,        // 기존 form 객체 복사
+                    [name]: value   // 변경이 일어난 input의 name을 key로 삼아, 새로운 value로 덮어쓴다.
+                });
+            }
+
+            const handleSignup = () => {
+                alert(`아이디: ${username}\n 이메일: ${email}`);
+                setForm({username:'', email:''});
+            }
+
+            return (
+                <>
+                    <h2> 효율적인 이벤트 처리 </h2>
+                    <input
+                        type="text"
+                        name="username" // state 객체의 key와 동일한 이름!
+                        placeholder="아이디"
+                        value={username}
+                        onChange={hadleChange}
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="이메일"
+                        value={email}
+                        onChange={hadleChange}
+                    />
+                    <button onClick={handleSignup}>가입하기</button>
+                </>
+            )
+        }
+
+
+
+
+        function App() {
+            return (
+                <>
+                    <SignupFormBasic />
+                    <hr/>
+                    <SignupFormAdvanced/>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>
