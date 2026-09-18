@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useEffect } = React;
+
+        function MessagePrinter() {
+            console.log('렌더링');
+
+            // 화면을 그리는 코드가 아니라, 화면이 그려진 뒤 실행할 부수 효과(side effext)를 작성하는 자리
+            // 콘솔 출력, 타이머 등록, 이벤트 등록, API 요청 등
+            useEffect(() => {
+                console.log('렌더링 이후 동작...');
+                console.log(message);
+            })
+
+            return (
+                <h1>{console.log('렌더링 시 출력')}{message}</h1>
+            )
+        }
+        const message = '안녕하세요!'
+
+        function App() {
+            return (
+                <>
+                    <MessagePrinter />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>

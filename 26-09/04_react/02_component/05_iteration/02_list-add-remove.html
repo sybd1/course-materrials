@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function NameList() {
+
+            const [inputValue, setInputValue] = useState('');
+            const [names, setNames] = useState([
+                { id: 1, text: '푼다' }
+            ]);
+            const [nextId, setNextId] = useState(2);
+
+            const handelChange = (e) => setInputValue(e.target.value);
+
+            const handleAdd = () => {
+                if (inputValue.trim() === '') return;
+                const newName = { id: nextId, text: inputValue };
+
+                // 스프레드 문법을 활용하여 새 배열을 만들어 setter에 전달
+                // 그래야 React가 '배열이 바뀌었다'는 사실을 안정적으로 인식할 수 있다
+                setNames([...names, newName]);
+                setNextId(nextId + 1);
+                setInputValue('');
+            }
+
+            const handleRemove = (idToRemove) => {
+                /*
+                    배열.filter(callback)
+                    배열의 각 요소를 검사한 뒤 콜백 함수가 true를 반환한 요소만 모아
+                    새 배열을 반환한다
+                */
+                // id로 넘어온 값과 일치하지 않는 객체만 다시 배열로 반환
+                const updateNames = names.filter(name => name.id !== idToRemove);
+                setNames(updateNames);
+            }
+
+            return (
+                <>
+                    <input
+                        type="text"
+                        placeholder="이름을 입력하세요"
+                        value={inputValue}
+                        onChange={handelChange}
+                    />
+                    <button onClick={handleAdd}>추가</button>
+
+                    <ul>
+                        {names.map(name => (
+                            <li key={name.id} onDoubleClick={() => handleRemove(name.id)}>{name.text}
+                                <button onClick={() => handleRemove(name.id)}>
+                                    삭제
+                                </button></li>
+                        ))}
+                    </ul>
+                </>
+            )
+        }
+
+        function App() {
+            return (
+                <>
+                    <NameList />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>

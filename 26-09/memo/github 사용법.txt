@@ -1,0 +1,40 @@
+github 사용법
+
+git flow: 단계가 세부적이라 버그 날 확률이 적다.
+feature에서 개발을하고 develop에 merge를 하게 된다.
+release qa를 하는 브랜치 테스트
+마지막으로 main 브랜치에 merge
+긴급한 버그는 hot fix
+
+네이밍 규칙, 커밋은 팀마다 정한다
+
+이슈, 풀리퀘스트 템플릿을 만들어 md파일로 추가를 한다.
+
+
+
+
+
+
+
+
+
+
+github flow: 단계가 적어 문제가 많을 확률이 높다. 하지만 복잡하지 않고 빠르다.
+
+feature branch 와 master 브랜치 2개 밖에 없다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

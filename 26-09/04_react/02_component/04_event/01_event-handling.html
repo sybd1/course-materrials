@@ -67,7 +67,7 @@
                 // name은 어떤 input에서 이벤트가 발생했는지 구분하는 이름
                 // value는 사용자가 입력한 최신 값
                 const { name, value } = e.target;
-                console.log(name,value);
+                console.log(name, value);
 
                 setForm({
                     ...form,        // 기존 form 객체 복사
@@ -77,7 +77,7 @@
 
             const handleSignup = () => {
                 alert(`아이디: ${username}\n 이메일: ${email}`);
-                setForm({username:'', email:''});
+                setForm({ username: '', email: '' });
             }
 
             return (
@@ -102,15 +102,43 @@
             )
         }
 
+        function CustomButton({ onClick, children }) {
+
+            // console.log(props);
+
+            return (
+                <>
+                    <button style={{
+                        backgroundColor: 'black',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '8px',
+                        margin: '15px',
+                        padding: '10px'
+                    }}
+                        onClick={onClick}>{children}
+                    </button>
+                </>
+            )
+        }
+
 
 
 
         function App() {
+
+            const showWelcomeMessage = () => {
+                alert('우리 사이트에 오신 것을 환영합니다.');
+            }
+
             return (
+
                 <>
                     <SignupFormBasic />
-                    <hr/>
-                    <SignupFormAdvanced/>
+                    <hr />
+                    <SignupFormAdvanced />
+                    <hr />
+                    <CustomButton onClick={showWelcomeMessage}><strong>환영 메세지</strong></CustomButton>
                 </>
             )
         }
