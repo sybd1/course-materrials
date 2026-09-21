@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>콘솔을 확인하세요</h1>
+
+    <script>
+        
+        console.log('===동기 vs 비동기===');
+
+        function sayHello() {
+            console.log('3초 뒤에 음식이 나왔습니다!');
+        }
+
+        console.log('🍔 햄버거를 주문합니다.');
+        // setTimeout(sayHello, 3000);
+        console.log('🍟 감자튀김을 주문합니다.');
+
+        console.log('\n 콜백 지옥 체험');
+
+        function increase(number, callback) {
+            setTimeout(() => {
+                const result = number + 10;
+                console.log(result);
+
+                if (callback) {
+                    callback(result);
+                }
+            }, 1000);
+        }
+
+        // 여러 비동기 작업의 순서를 중첩 콜백만으로 관리할때의 콜백 지옥 현상
+        console.log('작업 시작...');
+        increase(0, (result) => {
+            increase(result, (result) => {
+                increase(result, (result) => {
+                console.log('모든 작업이 끝났습니다.');
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

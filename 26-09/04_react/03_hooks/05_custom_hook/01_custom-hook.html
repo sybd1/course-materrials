@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        // 커스텀 훅
+        // 1. 이름을 use로 시작한다.
+        // 2. 컴포넌트나 다른 커스텀 훅의 최상위에서 호출한다. 조건문, 반복문, 이벤트 핸들러 안에서 호출X
+        // 3. 커스텀 훅은 로직을 공유한다. (로직은 재사용하지만 각 호출의 state는 서로 독립적)
+        function useDelayTimer(delay) {
+
+            const [isReady, setIsReady] = useState(false);
+
+            useEffect(() => {
+                console.log(`${delay}초 타이머 시작`);
+                setIsReady(false);
+
+                const timer = setTimeout(() => {
+                    setIsReady(true);
+                    console.log('타이머 종료! 준비완료');
+                }, delay);
+
+                // 전달 받은 시간이 바뀌면 이전 effect의 cleanup이 먼저 실행되어
+                // 기존 타이머를 취소하고, 새로운 시간으로 타이머를 다시 등록한다.
+                return () => clearTimeout(timer);
+
+            }, [delay]);
+
+            return isReady;
+        }
+
+        function App() {
+
+            const isReady = useDelayTimer(5000);
+
+            return (
+                <>
+                    <h1>커스텀 훅 실습</h1>
+                    {isReady ? <h2>준비 완료! 안녕하세요~</h2>
+                        :
+                        <h2>잠시만 기다려 주세요~</h2>}
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>

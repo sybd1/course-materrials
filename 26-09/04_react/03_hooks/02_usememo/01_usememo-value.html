@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const {useState, useMemo} = React;
+
+        const hardCalculator = (num) => {
+            console.log('어려운 계산 시작');
+            for(let i = 0; i < 99999999; i++) {}
+            return num + 10000;
+        }
+
+        const easyClaculator = (num) => {
+            console.log('쉬운 계산 시작');
+            return num + 1;
+        }
+
+        function App() {
+            const [hardNumber, setHardNumber] = useState(1);
+            const [easyNumber, setEasyNumber] = useState(1);
+
+            const hardSum = useMemo(() => {
+                return hardCalculator(hardNumber); // 계산해서 반환할 값
+            }, [hardNumber]);     // 계산에 사용한 의존성
+
+
+            const easySum = easyClaculator(easyNumber);
+            return (
+                <>
+                    <h3>어려운 계산기</h3>
+                    <input
+                    type="number"
+                    value={hardNumber}
+                    onChange={(e) => setHardNumber(Number(e.target.value))}/>
+                    <span> + 10000 = {hardSum}</span>
+                    <hr/>
+                    <h3>쉬운 계산기</h3>
+                    <input
+                    type="number"
+                    value={easyNumber}
+                    onChange={(e) => setEasyNumber(Number(e.target.value))}/>
+                    <span> + 1 = {easySum}</span>
+
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>

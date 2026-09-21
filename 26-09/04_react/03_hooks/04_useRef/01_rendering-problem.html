@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useRef } = React;
+
+        function Counter() {
+
+            console.log('렌더링 됨..');
+
+            /*
+            * 1. useState
+            * 값이 바뀌면 React가 컴포넌트를 다시 렌더링한다
+            * 화면에 바로 보여줘야 하는 값은 state로 관리한다
+            */
+            const [count, setCount] = useState(0);
+
+            let variable = 0;
+
+            /**
+             * .current 프로퍼티에 값을 저장한다.
+             * 값이 바뀌어도 리렌더링을 일으키지 않고, 리렌더링 되어도 값이 초기화되지 않는다.
+             * 
+             * 즉, 화면에는 즉시 반영하지 않아도 되지만 컴포넌트가 기억해야 하는 값에 적합하다
+             * 예: 타이머id, 이전 값, DOM 요소 참조
+             */
+            const countRef = useRef(0);
+
+            const increaseCount = () => {
+                setCount(count + 1);
+            };
+
+            const increaseVariable = () => {
+                variable += 1; // variable = variable + 1;
+                console.log('지역변수(variable) 값:', variable);
+            };
+
+            const increaseCountRef = () => {
+                countRef.current += 1;
+                console.log('Ref(countRef) 값', countRef.current);
+            }
+
+            return (
+                <>
+                    <h1>State: {count}</h1>
+                    <h2>Variable: {variable}</h2>
+                    <h3>Ref: {countRef.current}</h3>
+                    <button onClick={increaseCount}>State 증가</button>
+                    <button onClick={increaseVariable}>Variable 증가</button>
+                    <button onClick={increaseCountRef}>Ref 증가</button>
+                </>
+            )
+        }
+
+
+        function App() {
+            return (
+                <>
+                    <Counter />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>

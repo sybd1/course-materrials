@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useRef, useEffect } = React;
+
+        function LoginComponent() {
+            const [form, setForm] = useState({
+                username: '',
+                password: ''
+            });
+
+            const usernameRef = useRef();
+            console.log(usernameRef.current);
+
+            /**
+             * 렌더링이 끝나기 전에는 실제 DOM요소가 아직 준비되지 않았을 수 있으므로,
+             * DOM을 직접 다루는 코드는 useEffect안에서 처리하는 것이 자연스럽다.
+             */
+            useEffect(() => {
+                console.log('Login 컴포넌트가 마운트 되었습니다.');
+                console.log(usernameRef.current);
+                usernameRef.current.focus();
+            }, []);
+
+            const onClickHandler = () => {
+                alert(`username: ${form.username}, password: ${form.password}`);
+                setForm({username: '', password: ''});
+                usernameRef.current.focus();
+            }
+
+
+            const onChangeHandler = (e) => {
+                setForm({
+                    ...form,
+                    [e.target.name]: e.target.value
+                });
+            }
+            /**
+             * input 태그의 ref 속성에 usernameRef를 연결하면
+             * React가 렌더링 후 usernameRef.current에 해당 input DOM 요소를 넣어준다.
+             */
+            return (
+                <>
+                    <input type="text"
+                        name="username"
+                        value={form.username}
+                        onChange={onChangeHandler}
+                        ref={usernameRef}
+                    />
+                    <br />
+                    <input
+                        type="password"
+                        name="password"
+                        value={form.password}
+                        onChange={onChangeHandler}
+                    />
+                    <br/>
+                    <button onClick={onClickHandler}>로그인</button>
+                </>
+            )
+        }
+
+
+        function App() {
+            return (
+                <>
+                    <LoginComponent />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>콘솔 확인~</h1>
+    <script>
+        /**
+         * promise: 아직 끝나지 않은 비동기 작업의 미래 결과를 나타내는 객체
+         * 비동기 작업의 결과를 담는 객체
+         * 대기(Pending), 성공(Fufilled), 실패(rejected)상태 중 하나를 가짐
+         */
+
+        function increase(number) {
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const result = number + 10;
+
+                    if (result > 30) {
+                        const e = new Error('숫자가 너무 큽니다.');
+                        return reject(e);
+                    }
+                    // 계산된 결과와 함께 성공처리 -> .then 매개변수로 전달 된다
+                    resolve(result);
+                }, 1000);
+            });
+
+            return promise;
+        }
+
+        console.log('작업 시작');
+
+        increase(0)
+            .then((number) => {
+                console.log(number);
+                return increase(number);
+            })
+            .then(number => {
+                console.log(number);
+                return increase(number);
+            })
+            .then(number => {
+                console.log(number);
+                return increase(number);
+            })
+            .catch(error => {      // .then 체인 중간에 reject하면 여기서 잡힘
+                console.log(error)
+            })
+            .finally(() => {       // 성공하든 실패하든 무조건 마지막에 실행
+                console.log('모든 작업이 끝났습니다');
+            })
+    </script>
+</body>
+
+</html>

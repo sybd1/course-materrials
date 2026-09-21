@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useEffect, useCallback } = React;
+
+        function App() {
+
+            const [size, setSize] = useState(200);
+            const [isDark, setIsDark] = useState(false);
+
+            // 스타일 객체를 만드는 함수
+            const genSquareStyle = useCallback(() => {
+                return {
+                    backgroundColor: 'orange',
+                    width: `${size}px`,
+                    height: `${size}px`
+                }
+            }, [size]);
+
+
+            return (
+                <div style={{ backgroundColor: isDark ? 'pink' : 'white' }}>
+                    <input
+                        type="range"
+                        min="100"
+                        max="300"
+                        value={size}
+                        onChange={(e) => setSize(Number(e.target.value))}
+                    />
+                    <button onClick={() => setIsDark(!isDark)}>테마 변경</button>
+                    <Square genSquareStyle={genSquareStyle} />
+                </div>
+            )
+        }
+
+        function Square({ genSquareStyle }) {
+
+            console.log('자식 컴포넌트(square) 렌더링');
+
+            const [style, setStyle] = useState({});
+
+            useEffect(() => {
+                console.log('자식의 useEffect 실행(스타일 변경됨)');
+                setStyle(genSquareStyle());
+            }, [genSquareStyle]);
+
+            return <div style={style}></div>
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+    </script>
+
+</body>
+
+</html>
