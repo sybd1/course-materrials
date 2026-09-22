@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>콘솔 확인</h1>
+
+    <script>
+        
+        const API_URL = 'https://jsonplaceholder.typicode.com/users';
+
+        // .then() 체이닝 사용
+        function fetchDataWithThen() {
+            fetch(API_URL)
+            // 1단계: 서버의 응답(Response 객체)이 도착하면 실행
+            .then(response => {
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error(`HTTP error!!`);
+                }
+                // 실제 데이터 본문(body) 추출하려면 .json()호출
+                // .json() 역시 Promise를 반환하므로, return 해줘야 다음 .then에서 받을 수 있다
+                return response.json();
+            })
+            // 2단계: .json() Promise가 성공적으로 완료되면, 파싱된 데이터(data)를 받아서 실행
+            .then(data => {
+                console.log('실제 데이터', data)
+            })
+            .catch(error => {
+                console.log('데이터를 가져오는데 실패했습니다.', error);
+            });
+        }
+
+        async function fetchDataWithAsyncAwait() {
+            console.log('async/await 방식으로 fetch 시작');
+
+            try {
+                // 1단계 fetch가 완료되어 Response 객체가 올때까지 기다린다.
+                const response = await fetch(API_URL);
+                console.log(response);
+
+                if(!response.ok) {
+                    throw new Error(`HTTP error!`);
+                }
+                // 2단계 .json()이 완료되어 실제 데이터가 올 때까지 기다림
+                const data = await response.json();
+                console.log(data);
+            }
+            catch(error) {
+                console.error('데이터를 가져오는데 실패함', error);
+            }
+        }
+
+        // fetchDataWithThen();
+        fetchDataWithAsyncAwait();
+
+    </script>
+</body>
+</html>

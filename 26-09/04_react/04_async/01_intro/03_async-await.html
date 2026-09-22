@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <h1>콘솔을 확인하세요</h1>
+
+    <script>
+
+        function increase(number) {
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const result = number + 10;
+
+                    if (result > 30) {
+                        const e = new Error('숫자가 너무 큽니다.');
+                        return reject(e);
+                    }
+                    // 계산된 결과와 함께 성공처리 -> .then 매개변수로 전달 된다
+                    resolve(result);
+                }, 1000);
+            });
+
+            return promise;
+        }
+
+        // 함수 앞에 'async' 를 붙여야 내부에서 'await'를 사용할 수 있다
+        async function run() {
+            console.log('작업시작....');
+            // 에러가 발생할 수 있는 코드는 try 블록으로 감싼다
+
+            try {
+                // await: increase(0) Promise가 끝날 때까지 '기다렸다가',
+                // resolve된 결과값을 result 변수에 할당한다.
+                let result = await increase(0);
+                console.log(result);
+
+                result = await increase(result);
+                console.log(result);
+
+                result = await increase(result);
+                console.log(result);
+
+                result = await increase(result);
+                console.log(result);
+
+            } catch (error) {
+                // try 블록 안에서 promise가 reject되면 catch블록이 실행된다.
+                console.error(error);
+            }
+            console.log('작업이 완료 되었습니다.');
+        }
+
+        run();
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <script>
+        /**
+         * Axios: JS에서 HTTP 요청을 보내기 위한 외부 라이브러리
+         * fetch와 달리 브라우저에 기본 내장되어 있지 않아 별도로 설치를 해야 한다
+         */
+
+         const API_URL = 'https://jsonplaceholder.typicode.com/users/1';
+
+         async function callApiWithFetch() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error('error')
+                }
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('fetch에러');
+            }
+         }
+
+         // axios 사용
+         async function callApiWithAxios() {
+            try {
+                // .get() .post() 등 직관적인 메소드 사용
+                const response = await axios.get(API_URL);
+                console.log(response);
+                // json 파싱이 자동으로 되어 response.data에 담겨있음
+                const data = response.data; 
+            } catch (error) {
+                // axios는 4xx, 5xx HTTP에러를 자동으로 reject 처리하므로
+                // catch에서 바로 잡을 수 있다
+                console.log(error);
+            }
+         }
+
+         callApiWithAxios();
+        //  callApiWithFetch();
+    </script>
+</body>
+</html>
