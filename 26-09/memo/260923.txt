@@ -1,0 +1,108 @@
+260923
+
+부모 컴포넌트에서 자식 컴포넌트로 보낼때 매개변수 자리에 {} 중괄호 안에 객체 형태로 보낸다?????
+
+
+- Next.js
+
+Next.js 리액트 기능 + 앱을 만드는 규칙의 프레임워크
+
+nods.js 개발도구가 실행될 환경
+npm 패키지 관리와 프로젝트 명령 실행
+npx 필요한 도구의 명령 실행
+
+폴더
+public 사진 같은 정적
+src 주로 작업할 공간
+app 페이지를 찾는 출발점
+page.js http://localhost:3000/ 화면
+package.json CDN이 담겨있다.
+
+Next.js App Router - 라우터 구조
+기본원칙
+- 파일이 곧 URL
+
+app/page.js => /
+/ : 루트라고 읽음
+
+라우팅 : 주소창의 경로를 보고 어떤 화면을 켤지 고르는 거야. /면 홈, /login이면 로그인. React에선 페이지를 새로 받는 게 아니라, URL만 보고 컴포넌트를 갈아끼워.
+
+매핑: 라우팅은 “주소 → 화면”, 매핑은 “데이터 → 다른 데이터”(또는 리스트 → JSX 목록).
+
+렌더링: 그려질 내용을 계산하는 것.
+React 기준으로는 컴포넌트 함수가 다시 돌고, Virtual DOM을 만들고, 실제 DOM을 어디를 고칠지 정하는 단계. “화면에 픽셀이 찍혔다”와는 아직 다를 수 있어.
+
+페인팅: 브라우저가 픽셀을 칠하는 단계. 레이아웃으로 박스 위치/크기를 잡은 다음, 색·글자·이미지를 레이어에 실제로 찍는다. 그다음 GPU가 그 레이어들을 합성해서 모니터에 보낸다.
+
+app/about/page.js => /about
+about 경로로 매핑된다???
+
+export 하지 않으면 에러가 난다.
+export default 하면 경로를 따라갈 수 있다.
+
+import를 해야 제대로 된 경로를 찾아온다.
+import Link from "next/link";
+
+앱 안의 경로를 이동할땐 링크를 사용한다
+<Link href="/about"></Link>
+
+page.js를 감싸야할 HTML body 등은
+layout.js 파일에 있다. 
+
+page.js 파일이 실제 페이지 컴포넌트 역할을 한다.
+
+브라우저와 상호 작용이 필요한 컴포넌트는 상단에 'use client' 적어둬야 한다.
+
+usePathname() : 현재 경로 가져오기
+
+
+컨트롤 c : 서버 끄기
+
+npm run dev 켜기
+
+가장 바깥에 있는 폴더의 레이아웃 파일이 모두를 감싸고 있고, 안쪽의 레이아웃 파일은 그 폴더에만 적용된다.
+
+
+app : 주소랑 연결되는 폴더
+
+npx create-next-app@latest nexts-params
+Next.js 기본 폴더 만들기 설정 가장 뒤가 폴더 이름
+
+정해진 파일 이름
+page.js
+layout.js
+
+- 동적 라우팅
+
+import/export 차이??????????????
+
+/menu/[menuCode]/page.js
+폴더 자체가 변수가 된다.
+
+useParams() : 동적인 값을 읽어옴
+[] 배열로 만든 폴더의 값???
+
+gitignore 당한 node.modules를 npm install 을 하면 다운받아진다.
+
+쿼리 스트링??????????
+
+Suspense fallback={<h1>확인하는 중입니다.</h1>}
+넥스트가 검색을 하는 동안 띄울 것을 설정할 수 있다.
+
+next/navigation
+
+'use client' 선언을 해야 사용할 수 있다.
+
+usePathname() : 현재 URL의 순수경로를 읽어옴(활성탭/ 메뉴 스타일 적용 시)
+
+useParams() : [폴더명] 형태의 동적 라우팅 파라미터를 읽어옴 (상세 페이지 데이터 페칭 시 /menu/1에서 1)
+
+useSearchParams() : URL 끝의 쿼리스트링(?key=value)을 읽어옴. (검색 결과 페이지, 필터링 시 ?menuName=마늘)
+
+useRouter() : 함수/이벤트 내에서 프로그래밍 방식으로 페이지 이동 (폼 제출 후 완료 페이지 이동, 뒤로 가기 등 router.push())
+
+Next 장점: 기본 서버, 클라이언트
+
+redux/zustand 전역 객체 관리 라이브러리
+
+Ai CC
