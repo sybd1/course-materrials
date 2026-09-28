@@ -1,0 +1,25 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "첫 번째 게시글",
+      "author": "판다"
+    },
+    {
+      "id": "2",
+      "title": "HTTP 요청 연습",
+      "author": "코알라"
+    },
+    {
+      "title": "수정된 게시글 제목",
+      "author": "익룡",
+      "id": "U9-CuZTWQnw"
+    },
+    {
+      "title": "새로운 게시글1790579897009",
+      "author": "익룡",
+      "id": "C7b_s4OSyOw"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

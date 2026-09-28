@@ -1,0 +1,80 @@
+260928
+
+
+- 헷갈리는 것들
+
+rest parameter는 구조분해 할당에서 특정 프로퍼티를 제외하고 나머지 프로퍼티를 새로운 객체로 모으는 문법
+const user = { id: 1, password: 'secret', name: '철수', age: 20};
+
+const {password, ...safeUser} = user;
+console.log(safeUser);  // { id: 1, name: '철수', age: 20 }
+
+
+
+- props drilling
+부모와 자식 사이 중간 컴포넌트들이 사용하지도 않는 state 값들을 전달해주는 상황
+state 값을 수정해야할때 전달 경로에 있는 모든 state 값들을 수정해야해서, 유지보수적으로 좋지 않다.
+
+
+- zustand (독일어로 상태라는 뜻)
+전역 상태 (Global State)를 관리하는 라이브러리 중 하나.
+store를 컴포넌트 밖에 따로 두고 끌어와서 언제든지 사용할 수 있다? 상태관리 하기 편리한 라이브러리. store는 외부의 공용창고라고 생각하면 된다.
+
+zustand는 store에 state값들을 저장해둬 사용하지 않는 중간 경로의 컴포넌트에게 따로 state 값을 지정해두지 않아도 된다.
+
+npm install zustand : zustand 설치 명령어
+src 하위 폴더로 store 만들어서 사용
+create라는 함수 이용. 파라미터로 set
+
+실무에서는 store의 역할을 분리해서 만든다.
+
+immer 함수 알아보기. 배열을 편하게 정리할 수 있다???
+
+persist: 새로고침을 해도 변경 값이 유지된다. 브라우저 저장소 locaStorage에 상태가 저장된다. zustand의 middleware이다.
+middleware: 기존 동작 중간에 추가 기능이 생긴다.
+
+에러 처리는 실무에서 필수이다.
+
+Hydration 에러
+1. 서버에서 HTML 생성
+2. 브라우저가 HTML 표시
+3. React가 브라우저 실행
+4. 기존 HTML에 이벤트, 상태 연결
+
+
+- json-server
+db.json
+GET, POST, PATCH, DELETE
+Mock API 실제 백엔드를 사용하기 전, 모의환경
+
+npm install -D json-server
+협업할때 gitignore으로 node_modules가 제대로 설치가 안 될 수 있으므로, 협업시엔 node_modules 잘 확인하고 npm install으로 필요한 것들 잘 설치해주기
+
+
+♡( ◡‿◡ )
+
+- HTTP Method: GET, POST, PATCH, DELETE
+C : Create, 새로운 데이터 생성 POST /posts
+R : Read, 데이터 조회 GET /posts, /posts/1
+U : Update, 기존 데이터 수정 PUT, PATCH /posts/1
+PUT: 자원 전체를 교체할때
+PATCH: 자원 일부를 교체할때
+D : Delete, 기존 데이터 삭제 DELETE /posts/1
+
+- TanStack: 비동기 함수의 요청을 관리하는 라이브러리. 서버에서 가지고 오는 정보를 편리하게 관리 할 수 있는 라이브러리.에러, 로딩 등.
+
+npm install @tanstack/react-query
+
+useQuery: 
+QueryClient: 
+
+RootLayout에 Providers를 집어 넣어 children을 감싸 주었다.
+
+data,
+ isLoading, 현재 접속 요청 중 (처음)
+ isError,
+ error,
+ refetch, 다시 실행할게요.
+ isFetching 현재 네트워크 요청 진행 중
+
+캐시에 저장한다???
