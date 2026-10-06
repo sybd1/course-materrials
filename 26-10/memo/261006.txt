@@ -1,0 +1,51 @@
+261006
+
+Java: 화면 뒤에서 데이터를 처리할 수 있는 언어. 안정성과 구조를 굉장히 중요하게 생각하는 언어.
+
+
+Java Code를 작성하면, Java Compiler가 읽어서 컴퓨터가 이해할 수 있는 기계어로 번역해주고 오류가 난 부분도 미리 알려주고 실행시키지 않는다.
+
+Java Byte Code: Java는 독특하게 Compiler 이후에 또 다른 과정을 거친다. Java만의 특수한 중간 언어. 바이트 코드로 번역된 언어를 JVM이 설치되어 있는 다른 운영체제의 컴퓨터에 보내면 다양한 운영체제에서 실행될 수 있게 도와준다.
+
+.java -> .class(바이트 코드) -> JVM이 설치된 운영체제
+
+JVM (Java Virtual Mechine) 어떤 운영체제(window, mac, Linux 등)에서도 Java만을 위해 존재하는 가상의 컴퓨터
+
+JDK 안에 JRE 안에 JVM이 포함되어 있다.
+
+JDK (Java Development Kit) : Compiler와 개발도구가 포함되어 있다. Java를 개발하기 위해 필요한 모든 도구.
+
+JRE (Java Runtime Environment) : Java로 작성된 프로그램을 실행시킬 수 있는 도구.
+
+JVM
+
+
+IDE: 통합 개발 환경. 편하게 개발을 할 수 있게 도와주는 도구.
+ex) intellij
+
+src: sorce
+Main: class
+
+Java에서 문자 형태는 '', 문자열 형태는 ""
+문자형태 'a'
+문자열형태 "abc"
+
+Java
+자료형을 설정하고 변수를 선언하는 정적 타입 언어.
+JS에서는 세미콜론을 번역하는 과정에서 자동으로 달아주지만, Java는 세미콜론을 달지 않으면 에러가 뜬다.
+
+
+method: 어떤 특정 작업을 하기 위한 명령문의 집합
+
+void: 반환 값이 없음을 뜻 한다.
+
+
+class 명은 pakage까지 포함되어 있다. 폴더 하나하나를 pakage라고 부른다.
+
+pakage가 서로 다르면 import 구문이 있어야 사용가능하다.
+혹은 com.ohgiraffers...... 클래스명 풀네임을 적어줘야 한다.
+
+
+
+
+
