@@ -22,11 +22,12 @@ public class Application2 {
         for (int i = 0; i < arr.length - 1; i++) {
             // 우선 현재 위치의 값이 가장 작다고 가정
             int minIndex = i;
-
+            System.out.println("i의 현재값: " + minIndex);
             // 인덱스의 값을 순서대로 비교한다
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[minIndex] > arr[j]) {
                     minIndex = j;
+                    System.out.println("j의 현재값: " + minIndex);
                 }
             }
             // 찾은 최소값(arr[minIndex])과 현재 자리(arr[i]) 값을 교환
