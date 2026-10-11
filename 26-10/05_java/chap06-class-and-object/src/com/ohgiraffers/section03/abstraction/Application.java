@@ -34,7 +34,7 @@ public class Application {
                     racer.stepAccelerator();
                     break;
                 case 3:
-                    racer.stopBrake();
+                    racer.stepBrake();
                     break;
                 case 4:
                     racer.turnOff();

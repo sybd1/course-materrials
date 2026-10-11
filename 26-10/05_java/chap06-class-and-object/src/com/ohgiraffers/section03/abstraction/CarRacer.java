@@ -14,7 +14,7 @@ public class CarRacer {
         myCar.go();
     }
     // 브레이크 밟도록 명령
-    public void stopBrake() {
+    public void stepBrake() {
         myCar.stop();
     }
     // 시동 끄도록 명령
