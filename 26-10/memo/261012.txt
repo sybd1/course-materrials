@@ -107,3 +107,6 @@ Service 화면을 눌렀을 때 일어나는 기능
 Repository 데이터베이스 역할
 Controller ???
 C -> S -> R -> ??? 순서가 있는듯???
+
+
+
