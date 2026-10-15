@@ -1,0 +1,191 @@
+261015
+
+- Collection
+
+컬렉션 프레임워크(넥스트, 스프링같은 프레임워크 아님.)
+여러 개의 데이터(객체)를 효과적으로 관리하기 위해 자바에서 제공하는 클래스들의 묶음.
+그 중 대표적인 자식 List, Set, Map 인터페이스로 분류된다.
+
+
+다형성을 활용해 상위타입으로 하위타입 생성자에 선언한다.
+( ex) List가 상위타입, ArrayList가 하위타입)
+(List alist = new ArrayList();)
+
+1. List 인터페이스
+**순서가 있는** 데이터의 집합으로 같은 **데이터의 중복 저장**을 허용한다.
+
+- ArrayList
+문법
+List<타입지정> 객체명 = new ArrayList<>();
+객체명.add(지정한타입의값)
+
+add(): 인덱스 마지막에 값을 추가할 수 있다.
+get(인덱스): 해당 위치의 값 조회 
+set(인덱스, 값): 해당 위치의 값 수정
+remove(인덱스 또는 값): 해당 위치 또는 해당 값 삭제
+size(): 현재 저장된 요소 개수 확인. 인덱스 개수X, 정수값으로 반환.
+
+
+Collections 클래스
+컬렉션을 다루는데 유용한 static 메서드들을 제공하는 유틸리트 클래스. java.util에서 제공한다.
+
+sort(): 오름차순 정렬
+객체명.sort(Comparator.reverseOrder()): 내림차순 정렬. List 인터페이스에서 제공하는 sort 메서드에 Comparator.reverseOrder()를 인자로 전달
+
+???????????? Collections.sort()를 동작하게 하려고, compareTo를 오버라이딩해준다. ???????????????
+클래스 implements Comparable<클래스>
+Collections.sort(객체)
+compareTo 오버라이딩
+Integer.compare(this.number, o.getNumber())
+지정한 매개변수 number를 기준으로 오름차순을 정의한다.
+????????????????????????????????????????????????????????????????
+
+Collections.sort(): 정렬을 실행하는 기능
+
+Comparable<>: 객체를 어떤 기준으로 정렬할지 약속하는 인터페이스
+	class Xyz implements Comparable<Xyz> {}: 이 클래스는 클래스명 객체끼리 비교하는 기준을 제공하겠다는 의미.
+compareTo(): 실제로 두 객체의 순서를 비교하는 메서드
+	compareTo(Xyz o): 비교할 대상을 매개변수 o로 받는다.
+	Integer.compare(this.필드값, o.필드값): 현재 학생의 점수와 다른 학생의 점수를 비교해. 이 결과로 정렬 순서가 결정돼.
+
+Comparator<>: 애는 Comparable이랑 뭐가 다르지? Comparable는 내부에 필요할 때 사용하는 정렬? Comparator는 외부에 필요할때 사용하는 정렬? 기본값과 다른 기준으로 정렬하고 싶을때 사용한다.
+
+별도의 Comparator로 구현한 구현체 클래스를 전달한다.
+Integer.compare(o1.getPrice(), o2.getPrice())
+
+
+- LinkedList
+List 내부의 ArrayList는 배열처럼 번호가 붙은 칸으로 값을 관리한다. LinkedList는 각각의 데이터 요소가 있고, 이전링크 주소와 다음 링크 주소를 담고 있다. 그 요소가 기차처럼 이어져있다. ArrayList의 경우 중간에 값을 추가하거나 삭제할 경우 번호가 밀리거나 당겨져서 비효율적으로 동작할 수 있다. 그래서 조회할때 유리하다. LinkedList는 요소마다 앞 뒤의 주소를 가지고 있어서 중간에 요소를 추가하거나 삭제해도 요소끼리 주소만 참고하기 때문에 순서가 밀리거나 당겨지는 경우가 없어서 추가 삭제할때 효율적인 정렬이다.
+
+LinkedList는 '이중 연결 리스트' 방식으로 데이터 관리. 각 요소는 자신의 앞/뒤 요소만 기억한다.
+
+**자료 구조 특성에 맞게 "Collection 인터페이스를 상속한 List 인터페이스의 구현 클래스인 ArrayList와 LinkedList를 사용해야한다."**
+
+ArrayList는 특정 순서의 값을 조회 할 때 효율적이다.
+LinkedList는 중간에 데이터 추가/삭제에 효율적이다.
+추가/삭제가 많다는 이유만으로 항상 ArrayList보다 빠른 것은 아니다. 현업에선 대체로 ArrayList를 사용할 일이 많다.
+
+
+
+스택 = 후입선출 = LIFO
+
+- Deque 하위 클래스
+Queue의 하위 클래스 Deque는 원래 양방향에서 값을 자유롭게 꺼내 사용하지만, 한쪽을 막고 Stack처럼 후입선출로 사용하는 편이다.
+
+1,2,3,4,5 순서대로 값을 넣으면 5,4,3,2,1을 반환한다.
+
+push(): 맨 앞에 값을 추가.
+peek(): 마지막에 쌓은 데이터 확인.
+pop(): 가장 꼭대기 요소를 '꺼내'고 제거한다.
+
+Stack은 왜 시장됨????? 어떻게 한 쪽을 막았다는 건가????
+
+
+
+- Queue 인터페이스 (FIFO) 방식 자료구조.
+Queue 인터페이스는 데이터 선입선출. 마치 양방향이 뚫린 파이프에 한 방향으로 데이터를 넣고, 반대 방향에서 데이터를 꺼낸다. 선입선출.
+
+offer(): 기존 대기열 맨 뒤에 값을 추가
+peek(): 맨 앞의 요소를 '확인'
+poll(): 맨 앞의 요소를 '꺼내고' 제거한다.
+
+queue는 값이 비어있는 경우 null을 반환한다.
+Deque는 값이 비어있는 경우 NoSuchElementException 오류를 일으킨다.
+
+
+
+- 제네릭 와일드카드
+기본 제네릭은 타입을 지정하면 그 타입을 계속 사용해야 하는데, 제네릭 와일드카드는 그 타입의 범위를 정해서 폭 넓은 타입을 사용할 수 있다
+
+Number(상위) <- Integer(하위)
+		    <- Double(하위)
+상속관계를 가지고 있더라도, 컴파일에러가 발생한다????????????
+
+
+List<?> : 모든 자료형을 사용할 수 있다.
+List<? extends Number> : 숫자 자료형만 사용할 수 있다.
+List<? super Integer>: Integer와 Integer의 부모만 받겠다.
+상속관계 Object <- Number <- Integer
+
+제네릭 와일드 카드 문법부터 잘 이해가 안 됩니다???????????????
+
+.doubleValue(): 기본자료형의 double로 바꿔준다.
+
+
+
+2. Set 인터페이스
+Set은 몇번째 값을 꺼낸다는 순번 개념 자체가 없음. 데이터가 마구잡이로 들어있어서 중복된 값을 허용하지 않는다.
+
+- HashSet(): Set 인터페이스의 구현 클래스
+순번 개념 없이 저장하고 기억한다.
+
+iterator()를 호출하면 컬렉션을 순회할 수 있는 Iterator 객체를 반환한다.
+hasNext(): 다음에 꺼낼 요소가 있다면 true
+next(): 다음 요소를 꺼냄
+
+- linkedHashSet(): Set인터페이스의 구현 클래스
+중복되지 않은 값을 입력된 순서로 기억해준다.
+
+-TreeSet(): Set 하위 클래스의 SortedSet의 구현클래스. 중복 불가 특징과 함께, 요소를 저장할 때마다 비교 기준에 따라 요소를 정렬해서 보관.
+String 클래스와 Integer 같은 클래스는 이미 Comparable을 구현하여 자동 정렬된다.
+
+
+
+3. Map 인터페이스
+Collection Framwork안에 속하지만, Collection의 하위(자식) 클래스는 아니다.
+Entry = key, value를 하나의 쌍으로 묶어서 관리
+ket는 중복 저장을 허용하지 않는다.
+value를 중복 저장을 허용한다.
+
+HashMap(key, value): Map의 구현 클래스. 저장순서를 유지하지 않는다.
+
+존재하지 않는 key 값은 null을 반환한다.
+
+containsKey(): key 존재 여부 확인
+keySet(): 모든 키를 Set으로 받아, 카로 값을 다시 조회한다.
+values(): 모든 값들만 Collection으로 반환 받아 순회하는 방법
+entrySet(): 모든 키-값 쌍(Entry)를 Set으로 반환한다. key와 value 모두 필요할 때는 key로 다시 조회하지 않는 이 방식이 가장 직접적이다.
+
+
+
+
+Lsit: 순서O, 중복O, Stack LIFO, Queue FIFO
+Set: 순서X, 중복X, HashSet, LinkedHashSet: 순서 유지, TreeSet: 비교기준에 따라 정렬
+Map: key-value, key는 중복X value 중복O, 
+
+
+
+
+- exception
+오류(Error)와 예외(Exception)
+오류: 예측 불가능. JVM 에러, 정전, 컴퓨터 자체 하드웨어적인 문제 등
+
+예외: 개발자가 미리 예측하고 처리할 수 있는 미약한 오류.
+예외처리: 미리 예측하고 컨트롤. 미연에 방지. 개발 시에도 디버깅을 용이하게 해서 예외가 발생한 원인과 위치도 쉽게 파악할 수 있다.
+
+예외도 클래스이고 객체다.
+
+throw new Exception(): 예외 발생하는 문법. + 예외를 위임하는 문법도 메서드 선언부 매개변수 뒤에 throws Exception 적어줘야 한다.
+
+예외가 발생했을 경우 처리를 해줘야한다.
+
+해당 메서드를 사용하기 위해 클래스를 만들고 객체를 생성하고 메서드를 호출하면 컴파일러 오류가 뜨므로, 다시 메인에서 상대방에게 예외를 던져줘야한다. ????????????????????????
+
+예외처리를 해준 구간(throw)부터 코드가 중단된다.
+
+
+
+
+
+
+
+
+
+
+
+
+- 복습
+String이나 time 클래스 등 불변성이 있는 객체들을 변경하려고 하면 대체로 새로운 객체를 생성하므로, 새로운 객체는 변수로 담아서 사용해야한다.
+타입 안정성을 위해 제네릭을 사용한다.
+
+우! 우! 나~ 우! 우! 나~ 타쿠타쿠~ 챠오~!
