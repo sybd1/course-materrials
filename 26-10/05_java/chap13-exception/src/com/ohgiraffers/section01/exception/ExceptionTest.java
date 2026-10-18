@@ -1,6 +1,7 @@
 package com.ohgiraffers.section01.exception;
 
-public class ExceptionTest {
+public class
+ExceptionTest {
 
     /*
     * throw: 현재 위치에서 예외 객체를 직접 던진다.
