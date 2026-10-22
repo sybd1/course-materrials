@@ -10,7 +10,7 @@ INSERT INTO phone
 VALUES(1, 'iPhone', 2400000), (2, 'Galaxy', 2000000), (3, 'Xiaomi', 1700000);
 
 -- EXPLAIN은 SELECT문을 MySQL이 어떻게 실행할지 보여준다.
-EXPLAIN SELECT
+EXPLAIN SELECT	
 			* 
 		FROM
 			phone
