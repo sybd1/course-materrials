@@ -1,0 +1,140 @@
+261026
+
+- Spring Framework
+
+- Spring Core
+스프링 프레임워크를 구성하는 가장 기초적이고 핵심적인 모듈.
+IoC (Inversion of Control 제어의 역전)
+DI(의존성 주입)
+Bean (빈 컨테이너)
+
+Spring Container 라는 공간에서 객체를 관리함
+그렇게 관리하는 객체를 Bean이라고 부른다.
+
+build.gradle 파일 안에 사용하는 프레임워크 버전을 확인하고 적용할 수 있다???
+
+일반 자바 객체 (POJO):
+개발자가 직접 new 키워드로 생성하고 소멸시키는 객체입니다. (예: Member member = new Member();)
+
+스프링 빈 (Spring Bean):
+개발자가 직접 new로 만드는 것이 아니라, 스프링에게 위임하여 스프링 컨테이너가 생성, 관리, 의존성 주입(DI) 등을 전적으로 제어하는 객체입니다.
+
+Bean 3가지 방법
+XML config
+Java config
+Component scan
+
+ApplicationContext 인터페이스로 ???
+
+기본 생성자는 무조건 만드는 것이 아니라 의도에 맞게 생각하고 만들기.
+
+- XML 방식
+Spring으로 xml 안의 데이터를 꺼내와서 사용하는데, xml에 데이터가 모두 저장되는 거야?
+XML의 정확한 역할은 "설정 메타데이터(Configuration Metadata)"를 저장. 
+객체(Bean) 생성 정보: 스프링이 어떤 클래스를 객체로 만들어야 하는지 알려줍니다.
+XML에는 "이 클래스로부터 객체를 이렇게 만들어라." 라는 설계도가 적혀있다. 이를 Bean Definition(빈 정의)이라고 부른다.
+
+사용자가 서비스에 가입할 때 입력한 회원 정보, 게시글, 상품 목록 같은 실제 비즈니스 데이터는 XML이 아니라 데이터베이스(MySQL, Oracle 등)나 서버 메모리에 저장
+
+getBean(bean이름, 타입.class): xml설정에다가 만든 객체를 불러온다.
+
+최근에는 Java설정을 많이 사용하고, XML 방식은 잘 사용하지 않는다.
+
+GenericXmlApplicationContext("...xml 주소값"): XML 설정 파일을 읽어서 스프링 컨테이너(스프링 공장)를 실행시키는 클래스. 앞서 보셨던 spring-context.xml 같은 XML 파일 경로를 인자로 넣어주면, 스프링이 그 파일을 읽고 안에 적힌 대로 객체(Bean)들을 생성하고 조립.
+
+- Java 설정 방식
+자바 코드로 Bean을 만든다.
+
+setter 메서드 활용?
+
+@Configuration(""): 해당 클래스가 빈을 생성하는 클래스임을 표기한다.
+@Bean(""): 해당 메서드의 반환 값을 스프링 컨테이너에 bean으로 등록한다. Spring한테 객체 생성 설정을 알려주는 어노테이션.
+
+객체를 관리하는 책임이 누구한테 있는지가 IoC의 핵심이다.
+
+AnnotationConfigApplicationContext(.class): 자바 설정 클래스(@Configuration이 붙은 클래스)를 읽어서 스프링 컨테이너를 실행시키는 클래스. XML을 사용하지 않고 자바 코드로 설정할 때 사용하며, 괄호 안에 전달된 자바 클래스를 읽어들여 빈을 생성합니다.
+
+
+@ComponentScan
+basPackage로 설정된 하위경로에 특정 어노테이션을 가지고 있는 클래스를 bean으로 등록한다.
+목적에 따라 세부 기능을 제공하는 @Controller, @service, @Repository, @Configuration등을 사용한다.
+
+@Component
+bean 이름을 지정하지 않으면 클래스 이름의 첫글자를 소문자로 바꿔 bean으로 등록(memberDAO).
+
+Spring가 객체를 관리하기 시작하는 IoC(제어의 역전)가 일어난다.
+
+selectMember(): 데이터베이스(DB)에서 조건에 맞는 특정 회원(Member) 정보를 조회(Select)해서 자바 객체로 받아오는 메서드.
+insertMember(): 새로운 회원 데이터를 객체에 담아 전달하면 DB에 저장하고, 저장 성공 여부에 따라 true/false(또는 성공한 행의 개수)를 반환하는 메서드.
+
+IoC: 객체를 누가 만들고 관리하는가?
+DI: 필요한 객체를 누가 연결해 주는가?
+- DI 의존성 주입
+Spring이 객체를 만드는 것을 넘어, 연결까지 해준다.
+
+
+Application -> Controller -> Service -> Repository
+		     요청 전달     업무 처리  데이터 저장. 조회
+원래는 Repo가 아니라 DB 연결하는 듯.
+
+Controller (Service 필요)
+Service(Repository 필요)
+MemoryRepository (실제 저장 구현(실제로는 DB))
+
+
+- DI annotation
+
+@Component의 세분화 어노테이션의 한 종류로 DAO 타입의 객체에 사용한다.
+@Repository
+DAO계층의 인터페이스를 상속받는 클래스는 impl을 붙이는게 일반적이다.
+@Autowired: 의존 관계에 있는 타입과 일치하는 빈이 있다면 알아서 넣어준다. 필드 주입. ??????
+@Service: @Component의 세분화 어노테이션의 한 종류로 Service 계층에서 사용한다. ??????????
+
+@Controller
+@Configuration
+
+뭔지 하나도 모르겠음. 의존성이 뭔지도 모르겠음. 어노테이션들로 무슨 역할을 하는지도 모르겠음. 인터페이스랑 메서드들 무슨 기능인지도 모르겠음.
+
+
+컴포넌트 어노테이션이 빈 등록 어노테이션인가봐.
+
+@Primary: @Autowired로 동일한 타입의 여러 빈을 찾게 되는 경우 자동으로 연결 우선 시 할 타입으로 설정 된다.  동일한 타입의 클래스 중 한 개만 @Primary 어노테이션을 사용할 수 있다.
+
+@Qualifier(""): 특정 빈 객체를 지정할 수 있다. @Primary 어노테이션과 함께 쓰였을 때 @Qualifier가 우선한다.
+
+List를 활용해 모든 구현 클래스를 불러올 수 있다.
+
+
+실무에서는 어노테이션과 생성자 조합을 가장 많이 사용한다.
+
+
+
+- Bean
+스프링 컨테이너는 기본적으로 관리하는 모든 빈을 싱글톤으로 관리한다.
+
+@Bean
+@Scope("prototype")
+prototype으로 설정된 bean은 getBean()으로 호출할 때마다 새로운 인스턴스 반환.
+
+
+
+모든 클래스에 의존성 주입이 있음. 무조건 외워.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DAO: 데이터베이스에 접근하여 데이터를 다루는 작업(CRUD)을 모아둔 클래스
+
+

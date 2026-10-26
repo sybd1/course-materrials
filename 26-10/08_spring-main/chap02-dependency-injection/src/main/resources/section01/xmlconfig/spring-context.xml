@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean 태그의 클래스 속성은 인터페이스 타입이 아닌 구현 클래스 타입으로 작성해야 한다. -->
+    <bean id="account" class="com.ohgiraffers.common.PersonalAccount">
+        <constructor-arg index="0" value="20"/>
+        <constructor-arg index="1" value="110-234-567890"/>
+    </bean>
+
+    <!--  setter 주입 -->
+    <bean id="member" class="com.ohgiraffers.common.MemberDTO">
+        <property name="sequence" value="1"/>
+        <property name="name" value="홍길동"/>
+        <property name="phone" value="010-1234-5678"/>
+        <property name="email" value="hong123@gmail.com"/>
+        <property name="personalAccount" ref="account"/>
+    </bean>
+
+</beans>
