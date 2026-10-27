@@ -1,0 +1,14 @@
+.gradle/
+build/
+react-client/node_modules/
+react-client/.next/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### VS Code ###
+.vscode/

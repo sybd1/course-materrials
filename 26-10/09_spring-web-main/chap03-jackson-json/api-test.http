@@ -1,0 +1,22 @@
+### 1. Java List<MemberDTO> -> JSON 배열
+GET http://localhost:8080/api/v1/members
+
+### 2. Java MemberDTO -> JSON 객체
+GET http://localhost:8080/api/v1/members/1
+
+### 3. JSON 요청 본문 -> MemberDTO
+POST http://localhost:8080/api/v1/members
+Content-Type: application/json
+
+{
+  "memberNo": 5,
+  "name": "하재경",
+  "age": 18,
+  "enrollDate": "2026-05-27"
+}
+
+### 4. message + data 응답 구조
+GET http://localhost:8080/api/v1/members/response-wrapper
+
+### 5. ObjectMapper 직접 변환 확인
+GET http://localhost:8080/api/v1/members/object-mapper

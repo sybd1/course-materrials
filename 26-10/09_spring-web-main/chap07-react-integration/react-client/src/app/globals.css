@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #222;
+  background: #f7f7f7;
+}
+
+main {
+  width: min(640px, calc(100% - 40px));
+  margin: 60px auto;
+  padding: 32px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+}
+
+form {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+input,
+button {
+  padding: 10px 12px;
+}

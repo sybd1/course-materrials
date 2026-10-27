@@ -1,0 +1,34 @@
+### 1. 단일 파일 업로드
+POST http://localhost:8080/api/v1/files/single
+Content-Type: multipart/form-data; boundary=singleBoundary
+
+--singleBoundary
+Content-Disposition: form-data; name="description"
+
+단일 파일 설명입니다.
+--singleBoundary
+Content-Disposition: form-data; name="file"; filename="sample.txt"
+Content-Type: text/plain
+
+single file upload sample
+--singleBoundary--
+
+### 2. 다중 파일 업로드
+POST http://localhost:8080/api/v1/files/multiple
+Content-Type: multipart/form-data; boundary=multiBoundary
+
+--multiBoundary
+Content-Disposition: form-data; name="description"
+
+다중 파일 설명입니다.
+--multiBoundary
+Content-Disposition: form-data; name="files"; filename="sample1.txt"
+Content-Type: text/plain
+
+first file sample
+--multiBoundary
+Content-Disposition: form-data; name="files"; filename="sample2.txt"
+Content-Type: text/plain
+
+second file sample
+--multiBoundary--

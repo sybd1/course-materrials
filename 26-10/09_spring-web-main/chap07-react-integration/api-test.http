@@ -1,0 +1,11 @@
+### 메뉴 목록 조회
+GET http://localhost:8080/api/v1/menus
+
+### 메뉴 등록
+POST http://localhost:8080/api/v1/menus
+Content-Type: application/json
+
+{
+  "name": "바닐라라떼",
+  "price": 4500
+}

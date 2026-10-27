@@ -1,0 +1,26 @@
+### 1. 일반 API - StopwatchInterceptor 적용
+GET http://localhost:8080/api/v1/menus
+
+### 2. 일반 API - PathVariable + StopwatchInterceptor 적용
+GET http://localhost:8080/api/v1/menus/1
+
+### 3. 관리자 API - X-API-KEY 없음, 401 응답
+POST http://localhost:8080/api/v1/admin/menus
+Content-Type: application/json
+
+{
+  "menuCode": 4,
+  "menuName": "콜드브루",
+  "menuPrice": 5000
+}
+
+### 4. 관리자 API - X-API-KEY 있음, 통과
+POST http://localhost:8080/api/v1/admin/menus
+Content-Type: application/json
+X-API-KEY: secret-key
+
+{
+  "menuCode": 4,
+  "menuName": "콜드브루",
+  "menuPrice": 5000
+}

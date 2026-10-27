@@ -1,0 +1,33 @@
+### 1. @RequestParam - 모든 검색 조건 전달
+GET http://localhost:8080/api/v1/menus?keyword=coffee&categoryCode=2&page=1
+
+### 2. @RequestParam - 선택값을 생략해 기본값 확인
+GET http://localhost:8080/api/v1/menus
+
+### 3. @RequestParam Map - query string 전체 받기
+GET http://localhost:8080/api/v1/menus/search?name=latte&minPrice=3000&maxPrice=6000&orderableStatus=Y
+
+### 4. @PathVariable - URL 경로 값 받기
+GET http://localhost:8080/api/v1/menus/3
+
+### 5. @RequestBody - JSON 요청 본문을 DTO로 받기
+POST http://localhost:8080/api/v1/menus
+Content-Type: application/json
+
+{
+  "name": "아이스 아메리카노",
+  "price": 3000,
+  "categoryCode": 2,
+  "orderableStatus": "Y"
+}
+
+### 6. @RequestBody - 요청 본문을 문자열 그대로 받기
+POST http://localhost:8080/api/v1/menus/raw
+Content-Type: text/plain
+
+plain text body sample
+
+### 7. @RequestHeader, @CookieValue
+GET http://localhost:8080/api/v1/menus/request-info
+User-Agent: IntelliJ HTTP Client
+Cookie: clientId=client-001
