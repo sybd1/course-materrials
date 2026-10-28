@@ -1,9 +1,15 @@
 package com.ohgiraffers.exceptionhandler;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class MemberDTO {
 
+    @Min(value = 1, message = "회원 번호는 1 이상이어야 합니다.")
     private int no;
+    @NotBlank(message = "회원 이름이 비어 있을 수 없습니다.")
     private String name;
+    @Min(value = 0, message = "회원 나이는 0 이상이어야 합니다.")
     private int age;
 
     public MemberDTO() {

@@ -1,12 +1,19 @@
 package com.ohgiraffers.jackson;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 
 public class MemberDTO {
 
+    /* 직렬화와 역직렬화 모두 Java의 no를 JSON의 memberNo와 연결한다. */
+    @JsonProperty("memberNo")
     private int no;
     private String name;
     private int age;
+    /* LocalDate를 yyyy-MM-dd로 문자열로 주고 받으며 형식이 다르면 역직렬화에 실패한다. */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate enrollDate;
 
     public MemberDTO() {

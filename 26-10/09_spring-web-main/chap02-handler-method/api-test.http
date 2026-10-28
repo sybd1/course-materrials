@@ -8,7 +8,7 @@ GET http://localhost:8080/api/v1/menus
 GET http://localhost:8080/api/v1/menus/search?name=latte&minPrice=3000&maxPrice=6000&orderableStatus=Y
 
 ### 4. @PathVariable - URL 경로 값 받기
-GET http://localhost:8080/api/v1/menus/3
+GET http://localhost:8080/api/v1/menus/5
 
 ### 5. @RequestBody - JSON 요청 본문을 DTO로 받기
 POST http://localhost:8080/api/v1/menus
