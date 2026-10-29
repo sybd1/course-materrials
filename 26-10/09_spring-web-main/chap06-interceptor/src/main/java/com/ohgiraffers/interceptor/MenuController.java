@@ -38,6 +38,7 @@ public class MenuController {
          * StopwatchInterceptor의 처리 시간 측정 결과가 눈에 보이도록 일부러 지연을 만든다.
          * 실제 프로젝트 코드에는 이런 지연 코드를 넣지 않는다.
          */
+        System.out.println("/menus 핸들러 메서드 동작");
         Thread.sleep(300);
         return ResponseEntity.ok(menus);
     }
@@ -46,6 +47,7 @@ public class MenuController {
     public ResponseEntity<MenuDTO> findMenu(@PathVariable int menuCode) throws InterruptedException {
         /* 단건 조회도 처리 시간 측정 차이를 확인하기 위해 짧게 지연시킨다. */
         Thread.sleep(200);
+        System.out.println("/menust/{menuCode} 핸들러 메서드 동작");
 
         MenuDTO foundMenu = menus.stream()
                 .filter(menu -> menu.getMenuCode() == menuCode)
