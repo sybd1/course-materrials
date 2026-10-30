@@ -1,0 +1,77 @@
+﻿### 1. 응답 설계 심화 - 회원 목록 조회
+GET http://localhost:8080/api/v1/response/users
+
+### 2. 응답 설계 심화 - query string 검색
+GET http://localhost:8080/api/v1/response/users?status=active&name=고릴라
+
+### 3. 응답 설계 심화 - 회원 단건 조회
+GET http://localhost:8080/api/v1/response/users/1
+
+### 4. 응답 설계 심화 - 201 Created + Location header
+POST http://localhost:8080/api/v1/response/users
+Content-Type: application/json
+
+{
+  "id": "user04",
+  "pwd": "pass04",
+  "name": "신규회원",
+  "status": "active"
+}
+
+### 회원 수정
+PUT http://localhost:8080/api/v1/response/users/1
+Content-Type: application/json
+
+{
+  "id": "user01",
+  "pwd": "changed",
+  "name": "수정회원",
+  "status": "active"
+}
+
+### 5. 응답 설계 심화 - 204 No Content
+DELETE http://localhost:8080/api/v1/response/users/1
+
+### 6. Bean Validation - 정상 등록
+POST http://localhost:8080/api/v1/validation/users
+Content-Type: application/json
+
+{
+  "id": "user01",
+  "pwd": "pass01",
+  "name": "홍길동",
+  "enrollDate": "2024-01-01T00:00:00.000+00:00"
+}
+
+### 7. Bean Validation - 필수 값 누락으로 400
+POST http://localhost:8080/api/v1/validation/users
+Content-Type: application/json
+
+{
+  "pwd": "pass01",
+  "name": "홍길동",
+  "enrollDate": "2024-01-01T00:00:00.000+00:00"
+}
+
+### 8. Bean Validation - 이름 공백으로 400
+POST http://localhost:8080/api/v1/validation/users
+Content-Type: application/json
+
+{
+  "id": "user01",
+  "pwd": "pass01111111111111111111111111111",
+  "name": "",
+  "enrollDate": "2024-01-01T00:00:00.000+00:00"
+}
+
+### 9. 전역 예외 응답 - 존재하지 않는 회원으로 404
+GET http://localhost:8080/api/v1/validation/users/999
+
+### 10. Swagger 문서화 확인
+GET http://localhost:8080/swagger-ui/index.html
+
+### 11. Swagger 대상 API - 회원 목록 조회
+GET http://localhost:8080/api/v1/swagger/users
+
+### 12. Swagger 대상 API - query string 검색
+GET http://localhost:8080/api/v1/swagger/users?status=active&name=고릴라

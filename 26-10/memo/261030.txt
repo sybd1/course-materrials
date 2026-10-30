@@ -1,0 +1,160 @@
+261030
+
+- Rest API
+
+HTTP (HyperText Transfer Protocol)
+HTTP는 클라이언트(브라우저, 앱, 리액트 등)와 서버(스프링 등)가 데이터를 주고받기 위해 사용하는 통신 규칙(프로토콜)이다.
+인터넷에서 웹페이지, 이미지, API 호출 등이 이루어지는 모든 방식이 HTTP 기반으로 이루어진다.
+
+		HTTP Requerst
+클라이언트 ----------> 서버
+클라이언트 <---------- 서버
+		HTTP Response
+
+특징
+비연결성(Coneectionless): 요청이 끝나면 서버는 클라이언트 정보를 유지하지 않는다. 요즘은 일부로 연결을 하는 상태도 있다.
+무상태성(Stateless): 요청 간에 서버가 상태를 기억하지 않는다. 두번째 요청에서 첫번째 상태를 기억하고 있지 않다.
+% 그래서 쿠키 세션 토큰 같은 기술이 필요하다.
+텍스트 기반 프로토콜: 사람이 읽어도 이해할 수 있는 구조로 되어 있다.
+
+HTTP 요청
+GET, POST, PUT, PATCH, DELETE
+
+Headers 요청
+Content-Type: application/json 요청에 본문을 담는다.
+Authorization: ?
+
+Body 요청
+실제 데이터. 주로 POST, PUT, PATCH 요청에 주로 사용됨.
+예(JSON):
+{
+	"name": "설윤아",
+	"age": 23
+}
+
+HTTP 응답 ?
+Headers 응답 ?
+Body 응답 ?
+
+HTTP 상태코드
+1xx: 정보
+2xx: 성공/ 200 OK 요청성공, 201 CREATED 리소스 생성 성공, 204 No Content
+3xx: 리다이렉트
+4xx: 클라이언트 오류: 400 Bad Request, 401 Unauthorized(로그인 필요), 403 Forbidden(권한없음), 404 Not Found (리소스 없음)
+5xx: 서버 오류: 500 Internal Server Error(서버 내부 오류/ 개발자 실수 가능성 높음)
+
+
+-JSON
+과거엔 서버는 클라이언트에게 문자열 형태로 응답했다.
+주로 XML으로 데이터를 주고 받았고 단점이 많았다.
+
+JSON은 JS의 객체 표기법을 기반으로 한, 가볍고 일기 쉬운 텍스트 기반의 데이터 교환 형식이다.
+"Key":"Value"	Key와 문자열은 큰따옴표로 감싼다. value 값의 배열은 [] 대괄호 사용.
+
+
+Spring Boot에서 Java 객체를 반환하면 Spring Boot가 알아서 JSON으로 변환하여 응답해준다. 이 중심에는 @RestController가 있다.
+@RestController: ?
+
+
+- REST API 설계규칙
+REST API는 클라이언트와 서버가 HTTP를 통해 데이터를 주고받기 위한 설계방식이다.
+
+URL은 어떻게 정해야 할까?
+GET과 POST는 언제 써야 할까?
+수정은 PUT일까 PATCH일까?
+로그인은 REST API에서 어떻게 표현할까?
+401과 403은 뭐가 다를까?
+React와 Spring이 함께 개발하려면 API 명세를 어떻게 작성해야 할까?
+
+이런 것을 약속하고 정한다.
+
+React
+-> HTTP 요청
+-> Spring Boot REST API
+-> DB 처리
+-> JSON 응답
+-> React 화면 렌더링
+
+URL은 동사가 아니라 리소스 중심으로 작성한다.
+동작은 HTTP Method가 표현하고, URL은 대상을 표현한다. (보통 복수형으로 통일한다.)
+
+중첩 리소스 설계?
+
+에러 응답 설계?
+
+React와 Spring이 함께 개발하려면 API 명세가 반드시 필요하다.
+
+라이브러리
+webmvc: 다양한 것?
+devtools: 자동새로고침
+lombok: 어노테이션으로 생성자, 게터 세터, ToString을 만들어준다. 
+validation
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString(exclude = "pwd")
+exclude: 제외
+실제로는 비밀번호를 그대로 저장하는 것이 아닌 암호화해서 저장한다. (나중에 배움)
+
+
+
+URL ? URI ?
+
+
+@PUT은 제외되지 않은 모든 값을 다 보내야한다.
+@DELETE
+return ResponseEntity.noContent().build();
+
+
+- valid
+@NotBlank
+
+매개변수 앞 쪽에 @Valid: ? 이게 뭐여?
+
+실패했을시 에러를 일관성 있게 처리하기 위해???
+
+난리났네... 너무 어려워서...
+
+
+- Swagger
+프론트엔드 인간들이 벡엔드 코드를 읽지 못하니 배려해줘야한다.
+SpringDoc OpenAPI
+
+http://localhost:8080/swagger-ui/index.html
+테스트를 하기 좋다.
+
+@Schema(description ="")??
+@Tag??
+@Operation(summary = "") 저 사이트에 설명 달아줄 수 있음.
+
+@ApiResponses?
+
+
+
+
+
+
+
+
+
+복습
+@RequestParam(required = false) required = false가 어떤 뜻인가? required는 무엇을 위해 있는가?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
